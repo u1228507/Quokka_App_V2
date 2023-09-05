@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.quokka_app.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="com.example.quokka_app.ui.notifications.NotificationsFragment"
+        android:label="@string/menu_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/nav_newpatientprofiles"
+        android:name="com.example.quokka_app.ui.newpatientprofile.NewPatientProfileFragment"
+        android:label="@string/menu_newpatientprofiles"
+        tools:layout="@layout/fragment_newpatientprofiles"/>
+
+    <fragment
+        android:id="@+id/nav_patientprofiles"
+        android:name="com.example.quokka_app.ui.patientprofiles.PatientProfilesFragment"
+        android:label="@string/menu_patientprofiles"
+        tools:layout="@layout/fragment_patientprofiles"/>
+
+    <fragment
+        android:id="@+id/nav_userprofile"
+        android:name="com.example.quokka_app.ui.userprofile.UserProfileFragment"
+        android:label="@string/menu_userprofile"
+        tools:layout="@layout/fragment_userprofile" />
+
+</navigation>

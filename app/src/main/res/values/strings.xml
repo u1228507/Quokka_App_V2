@@ -1,0 +1,22 @@
+<resources>
+    // Navigation Strings
+    <string name="app_name">Quokka_App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Users Name Here</string>
+    <string name="nav_header_subtitle">User Email Here</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    // Strings For Fragments:
+    <string name="menu_home">Home</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_newpatientprofiles">New Patient Profiles</string>
+    <string name="menu_userprofile">User Profile</string>
+    <string name="menu_patientprofiles">Patient Profiles</string>
+
+    // Strings For Login
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+</resources>
