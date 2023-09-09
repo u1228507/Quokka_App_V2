@@ -9,6 +9,7 @@
     android:layout_gravity="center"
     tools:context=".LoginActivity">
 
+    <!-- Text: 'Login' -->
     <TextView
         android:id="@+id/text_login"
         android:layout_width="wrap_content"
@@ -23,34 +24,40 @@
         android:textStyle="bold"
         />
 
+    <!-- Input: Email -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp">
+        android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textinput_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Input: Password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp">
-
+        android:layout_marginEnd="32dp"
+        app:endIconMode="password_toggle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textinput_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Button: Login -->
     <Button
         android:id="@+id/button_login"
         android:layout_width="match_parent"

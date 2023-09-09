@@ -12,17 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quokka_App"
         tools:targetApi="31">
+
+        <!-- Activity: Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Quokka_App.NoActionBar">
+
+        </activity>
+
+        <!-- Activity: Login -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>
