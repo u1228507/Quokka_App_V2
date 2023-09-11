@@ -10,7 +10,6 @@
     <string name="newpatient_input_yes">Yes</string>
     <string name="newpatient_input_no">No</string>
     <string name="newpatient_input_lastmenstrualcycle">Does patient remember dates of last menstrual cycle?</string>
-    <string name="newpatient_hint_motherbirthdefect">Mother Birth Defects</string>
     <string name="newpatient_input_motherbirthdefects">Was mother born with any birth defects?</string>
     <string name="newpatient_input_firstpreg">Is this the patients first pregnancy?</string>
     <string name="newpatient_input_numprevpreg">Number of Previous Pregnancies</string>
@@ -21,8 +20,22 @@
     <string name="newpatient_input_csections">Number of C-Sections</string>
     <string name="newpatient_input_postpartumhemorrhages">Number of Postpartum Hemorrhages</string>
     <string name="newpatient_input_preginfections">Number of Pregnancy Infections</string>
-    <string name="newpatient_input_personalmedother">Other Personal Medical History Comments</string>
+    <string name="newpatient_input_personalmedother">Other Medical History Comments</string>
     <string name="newpatient_input_highbppregnancy">Number of High Blood Pressure Pregnancies</string>
+
+    <string name="newpatient_input_exercise"> How many days does the patient exercise per week?</string>
+
+
+    // Hints
+    <string name="newpatient_hint_motherbirthdefect">Mother Birth Defects</string>
+    <string name="newpatienti_hint_drinksperweek">Number of Drinks Per Week</string>
+    <string name="newpatienti_hint_smokesperweek">Number of Smokes Per Week</string>
+    <string name="newpatienti_hint_drugtype">Types of Drugs</string>
+    <string name="newpatient_hint_exercise">Days Exercised Per Week</string>
+    <string name="newpatient_hint_alcohol">Alcohol Consumption</string>
+    <string name="newpatient_hint_firstpreg">First Pregnancy?</string>
+    <string name="newpatient_hint_lastmenst">Last Menstrual Cycle</string>
+
 
 
     // Strings For New Patient Input Drop Down Menus
@@ -42,8 +55,35 @@
         <item>No</item>
     </string-array>
 
+    <string-array name="newpatient_input_alcoholconsump">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="newpatient_input_smoking">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="newpatient_input_drugs">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
     //Strings For New Patient Input Headers and Conditional TextView Questions
     <string name="newpatient_input_header_personalmedicalhistory">Personal Medical History:</string>
     <string name="newpatient_conditional_lastmenstrualcycle">What day did the patients last menstrual cycle begin?</string>
+    <string name="newpatient_conditional_birthdefect">What birth defect(s) was the mother born with?</string>
     <string name="newpatient_conditional_firstpreg">Is this the patients first pregnancy?</string>
+    <string name="newpatient_input_header_otherpersonal">Other Personal Medical History Questions:</string>
+    <string name="newpatient_input_header_lifestyle">Lifestyle Questions:</string>
+    <string name="newpatient_conditional_alcoholconsump">Has the patient consumed alcohol during the pregnancy?</string>
+    <string name="newpatient_conditional_drinksperweek">How many drinks does the patient consume per week?</string>
+    <string name="newpatient_conditional_smoking">Does the patient smoke tobacco or use nicotine-containing products? </string>
+    <string name="newpatient_conditional_smokesperweek"> How many cigarettes or nicotine-containing products does the patient use per day.</string>
+    <string name="newpatient_conditional_drugs">Does the patient use any recreational drugs</string>
+    <string name="newpatient_conditional_drugtype"> What types of drugs does the patient use?</string>
+
+    // Random Strings:
+    <string name="newpatient_button_createprofile">Create Patient Profile</string>
 </resources>

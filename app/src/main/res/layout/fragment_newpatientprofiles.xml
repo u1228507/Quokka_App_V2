@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-38dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-360dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:maxLength="30"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:hint="@string/newpatient_input_middlename"
@@ -67,7 +68,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:maxLength="31"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: Last Name -->
@@ -77,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:hint="@string/newpatient_input_lastname"
@@ -95,17 +97,18 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:maxLength="31"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Input: Date of Birth (Still Need To Work On How User Inputs This -->
+            <!-- Input: Date of Birth (Still Need To Work On How User Inputs This) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_dob"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:hint="@string/newpatient_input_dob"
@@ -122,7 +125,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="date"
                     android:maxLength="10"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Header: Personal Medical History -->
@@ -134,11 +138,10 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/newpatient_input_header_personalmedicalhistory"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <!-- Input: Last Menstrual Cycle -->
-                    <!-- Last Menstrual Cycle Question -->
+            <!-- Last Menstrual Cycle Question -->
             <TextView
                 android:id="@+id/inputquestion_lastmenstcycle"
                 android:layout_width="match_parent"
@@ -148,9 +151,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:text="@string/newpatient_input_lastmenstrualcycle"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
-                     <!-- Yes or No Menu -->
+            <!-- Yes or No Menu -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_lastmenstcycle"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -163,6 +166,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/input_dropdown_lastmenstcycle"
+                    android:hint="@string/newpatient_hint_lastmenst"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -179,12 +183,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:text="@string/newpatient_conditional_lastmenstrualcycle"
                 android:textSize="16sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_lastmenstcycle_yes"
@@ -192,7 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
@@ -210,22 +214,22 @@
                     android:inputType="date"
                     android:maxLength="10"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: Mother Birth Defects -->
-                <!-- Mother Birth Defects Question -->
+            <!-- Mother Birth Defects Question -->
             <TextView
                 android:id="@+id/inputquestion_motherbirthdefect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:text="@string/newpatient_input_motherbirthdefects"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <!-- Yes or No Menu -->
             <com.google.android.material.textfield.TextInputLayout
@@ -256,12 +260,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
-                android:text="What birth defect(s) was the mother born with?"
+                android:text="@string/newpatient_conditional_birthdefect"
                 android:textSize="16sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_motherbirthdefect_yes"
@@ -269,7 +273,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
@@ -287,22 +291,22 @@
                     android:inputType="text"
                     android:maxLength="100"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: First Pregnancy? -->
-                <!-- First Pregnancy Question -->
+            <!-- First Pregnancy Question -->
             <TextView
                 android:id="@+id/inputquestion_firstpreg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:text="@string/newpatient_input_firstpreg"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <!-- Yes or No Menu -->
             <com.google.android.material.textfield.TextInputLayout
@@ -315,16 +319,17 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp">
 
-            <AutoCompleteTextView
-                android:id="@+id/input_dropdown_firstpreg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="@string/newpatient_input_yes"
-                tools:ignore="VisualLintTextFieldSize" />
+                <AutoCompleteTextView
+                    android:id="@+id/input_dropdown_firstpreg"
+                    android:hint="@string/newpatient_hint_firstpreg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_yes"
+                    tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Conditional Input If Yes -->
@@ -338,25 +343,25 @@
                 android:layout_marginBottom="0dp"
                 android:text="@string/newpatient_conditional_firstpreg"
                 android:textSize="16sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
-                 <!-- Number of Previous Pregnancies  -->
+            <!-- Number of Previous Pregnancies  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_firstpreg_numprevpreg"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_numprevpreg"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_numprevpreg"
@@ -365,7 +370,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Living Children  -->
@@ -375,16 +380,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_numlivchild"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_numlivchil"
@@ -393,7 +398,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Low Weight Births (>2.5kg)  -->
@@ -403,16 +408,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_lowweight"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_lowweight"
@@ -421,7 +426,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Stillborns  -->
@@ -431,16 +436,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_stillborns"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_stillborns"
@@ -449,7 +454,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Miscarriages  -->
@@ -459,16 +464,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_miscarriages"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_miscarriages"
@@ -477,7 +482,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of C Sections  -->
@@ -487,16 +492,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_csections"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_csections"
@@ -505,7 +510,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Postpartum Hemorrhages  -->
@@ -515,16 +520,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_postpartumhemorrhages"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_postpartumhemorrages"
@@ -533,7 +538,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of Pregnancy Infections  -->
@@ -543,16 +548,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_preginfections"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_preginfections"
@@ -561,7 +566,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Number of High Blood Pressure Pregnancies  -->
@@ -571,16 +576,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                app:hintEnabled="true"
                 android:hint="@string/newpatient_input_highbppregnancy"
                 android:visibility="gone"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_firstpreg_highbppregnacies"
@@ -589,9 +594,22 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Input Header: Other Personal Medical History  -->
+            <TextView
+                android:id="@+id/textheader_otherpersonalmedical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="-15dp"
+                android:text="@string/newpatient_input_header_otherpersonal"
+                android:textSize="16sp"/>
+
+            <!-- Input: Other Personal Medical History  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_personalmedicalother"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
@@ -606,21 +624,301 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textinputedit_personalmedicalother"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLength="101"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Header: Lifestyle Questions -->
+            <TextView
+                android:id="@+id/inputheaders_lifestyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/newpatient_input_header_lifestyle"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Input: Alcohol Consumption -->
+                <!-- Alcohol Consumption -->
+            <TextView
+                android:id="@+id/inputquestion_consumealcohol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/newpatient_conditional_alcoholconsump"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_alcoholconsump"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/input_dropdown_alcoholconsump"
+                    android:hint="@string/newpatient_hint_alcohol"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_no"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Yes -->
+            <TextView
+                android:id="@+id/conditionaltext_alcoholconsump"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="-20dp"
+                android:text="@string/newpatient_conditional_drinksperweek"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_alcoholconsump_yes"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:hint="@string/newpatienti_hint_drinksperweek"
+                android:visibility="visible"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_dropdown_alcoholconsump_yes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textColor="@color/black"
+                    android:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Smoking  -->
+            <!-- Smoking -->
+            <TextView
+                android:id="@+id/inputquestion_smoking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/newpatient_conditional_smoking"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_smoking"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/input_dropdown_smoking"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_no"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Yes -->
+            <TextView
+                android:id="@+id/conditionaltext_smoking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="-20dp"
+                android:text="@string/newpatient_conditional_smokesperweek"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_smoking_yes"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:hint="@string/newpatienti_hint_smokesperweek"
+                android:visibility="visible"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_dropdown_smoking_yes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textColor="@color/black"
+                    android:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Recreational Drugs  -->
+            <!-- Recreational Drugs Text -->
+            <TextView
+                android:id="@+id/inputquestion_drugs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/newpatient_conditional_drugs"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_drugs"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/input_dropdown_drugs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_no"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Yes -->
+            <TextView
+                android:id="@+id/conditionaltext_drugs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="-20dp"
+                android:text="@string/newpatient_conditional_drugtype"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_drugs_yes"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:hint="@string/newpatienti_hint_drugtype"
+                android:visibility="visible"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_dropdown_drugs_yes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="100"
+                    android:textColor="@color/black"
+                    android:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Exercise -->
+            <TextView
+                android:id="@+id/inputquestion_exercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/newpatient_input_exercise"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_exercise"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="-15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:hint="@string/newpatient_hint_exercise"
+                android:visibility="visible"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_exercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="1"
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/button_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save" />
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:text="@string/newpatient_button_createprofile" />
 
         </LinearLayout>
     </ScrollView>

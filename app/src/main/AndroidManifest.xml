@@ -12,16 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quokka_App"
         tools:targetApi="31">
-
         <!-- Activity: Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Quokka_App.NoActionBar">
-
-        </activity>
-
-        <!-- Activity: Login -->
+            android:theme="@style/Theme.Quokka_App.NoActionBar"></activity> <!-- Activity: Login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -31,6 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
+
 </manifest>
