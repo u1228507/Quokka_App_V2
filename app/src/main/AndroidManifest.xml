@@ -16,7 +16,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Quokka_App.NoActionBar"></activity> <!-- Activity: Login -->
+            android:theme="@style/Theme.Quokka_App.NoActionBar">
+        </activity>
+
+        <!-- Activity: Login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
