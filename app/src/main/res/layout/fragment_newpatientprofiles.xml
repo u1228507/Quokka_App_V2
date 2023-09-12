@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/fragment_newpatientprofiles">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -128,6 +129,36 @@
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Patient Profile Picture -->
+            <TextView
+                android:id="@+id/inputheaders_patientprofilepicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/newpatient_inputheader_patientprofilepic"/>
+
+            <ImageView
+                android:id="@+id/PatientProfilePicture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/baseline_person_24_purple"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:contentDescription="@string/newpatient_input_patientprofileimage">
+            </ImageView>
+
+            <Button
+                android:id="@+id/button_patientprofileimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="@string/newpatient_button_selectpatientimage">
+            </Button>
+
 
             <!-- Header: Personal Medical History -->
             <TextView
