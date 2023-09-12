@@ -1,5 +1,10 @@
 package com.example.quokka_app.ui.newpatientprofile
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
@@ -21,6 +29,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
 
     private lateinit var auth: FirebaseAuth
 
+    private lateinit var imagePicker: ActivityResultLauncher<Intent>
+    private lateinit var permissionLauncher: ActivityResultLauncher<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +39,36 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
     ): View {
         _binding = FragmentNewpatientprofilesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // Patient Profile Image
+        imagePicker = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult())
+        {result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                val data : Intent? = result.data
+                val selectedImageURI : Uri? = data?.data
+                binding.PatientProfilePicture.setImageURI(selectedImageURI)
+            }
+        }
+
+        // Request Permission For Images
+        permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                selectImage()
+            } else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+
+        binding.buttonPatientprofileimage.setOnClickListener {
+            checkPermissionAndSelectImage()
+        }
+
 
         // Save Button Listener
         auth = FirebaseAuth.getInstance()
@@ -111,12 +152,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                             Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
                                         }
                                         .addOnFailureListener { e ->
-                                            // Handle the failure of subcollection add operation
                                             Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
                                         }
                                 }
                                 .addOnFailureListener { e ->
-                                    // Handle the failure of main document set operation
                                     Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
@@ -354,7 +393,28 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val drugs = resources.getStringArray(R.array.newpatient_input_drugs)
         val drugsArrayAdapter = ArrayAdapter(requireContext(),R.layout.newpatientinputs_dropdownmenus, drugs)
         binding.inputDropdownDrugs.setAdapter(drugsArrayAdapter)
-
     }
 
+// Permission Launcher
+    private val mediaPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        android.Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+             android.Manifest.permission.READ_EXTERNAL_STORAGE
+                }
+
+    private fun checkPermissionAndSelectImage() {
+        if (ContextCompat.checkSelfPermission(requireContext(), mediaPermission) == PackageManager.PERMISSION_GRANTED) {
+            selectImage()
+        } else {
+            permissionLauncher.launch(mediaPermission)
+        }
+    }
+
+
+    // Select Image for Patient Profile:
+    private fun selectImage(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        imagePicker.launch(intent)
+    }
 }

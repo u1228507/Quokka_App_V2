@@ -22,8 +22,8 @@
     <string name="newpatient_input_preginfections">Number of Pregnancy Infections</string>
     <string name="newpatient_input_personalmedother">Other Medical History Comments</string>
     <string name="newpatient_input_highbppregnancy">Number of High Blood Pressure Pregnancies</string>
-
     <string name="newpatient_input_exercise"> How many days does the patient exercise per week?</string>
+    <string name="newpatient_input_patientprofileimage">Patient Profile Image</string>
 
 
     // Hints
@@ -70,6 +70,7 @@
     </string-array>
 
     //Strings For New Patient Input Headers and Conditional TextView Questions
+    <string name="newpatient_inputheader_patientprofilepic">Patient Profile Image: </string>
     <string name="newpatient_input_header_personalmedicalhistory">Personal Medical History:</string>
     <string name="newpatient_conditional_lastmenstrualcycle">What day did the patients last menstrual cycle begin?</string>
     <string name="newpatient_conditional_birthdefect">What birth defect(s) was the mother born with?</string>
@@ -83,6 +84,7 @@
     <string name="newpatient_conditional_drugs">Does the patient use any recreational drugs</string>
     <string name="newpatient_conditional_drugtype"> What types of drugs does the patient use?</string>
 
-    // Random Strings:
+    // Button Strings:
     <string name="newpatient_button_createprofile">Create Patient Profile</string>
+    <string name="newpatient_button_selectpatientimage">Select Image</string>
 </resources>
