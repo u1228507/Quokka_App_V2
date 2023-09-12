@@ -47,7 +47,6 @@
     <string-array name="newpatient_input_motherbirthdefect">
         <item>Yes</item>
         <item>No</item>
-        <item>Unknown</item>
     </string-array>
 
     <string-array name="newpatient_input_firstpreg">

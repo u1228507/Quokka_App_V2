@@ -36,17 +36,61 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         binding.buttonSave.setOnClickListener {
             val userId = auth.currentUser?.uid
             if (userId != null) {
-                val newPatientProfile = NewPatienProfileDataClass(
-                    firstname = binding.textinputeditFirstname.text.toString(),
-                    lastName = binding.textinputeditLastname.text.toString()
-                )
+                val firstName = binding.textinputeditFirstname.text.toString()
+                val lastName = binding.textinputeditLastname.text.toString()
+                val dateOfBirth = binding.textinputeditDob.text.toString()
 
-                val profilesCollection = firestore.collection("Patient Profiles")
+                if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty()) {
+
+                // Boolean Inputs:
+                val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
+                val isLastMenstCycleYes = lastmenstcycleText.equals("yes", ignoreCase = true)
+                val motherbirthdefectText = binding.inputDropdownMotherbirthdefectYes.text.toString()
+                val isMotherBirthDefectYes = motherbirthdefectText.equals("yes",ignoreCase = true)
+                val firstpregText = binding.inputDropdownFirstpreg.text.toString()
+                val isFirstPregYes = firstpregText.equals("yes",ignoreCase = true)
+                val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
+                val isAlcoholConsumpYes = alcoholconsumpText.equals("yes",ignoreCase = true)
+                val smokingText = binding.inputDropdownSmoking.text.toString()
+                val isSmokingYes = smokingText.equals("yes",ignoreCase = true)
+                val drugsText = binding.inputDropdownDrugs.text.toString()
+                val isDrugsYes = drugsText.equals("yes",ignoreCase = true)
+
+                val newPatientProfile = NewPatienProfileDataClass(
+                    First_Name = firstName,
+                    Middle_Name = binding.textinputeditMiddlename.text.toString(),
+                    Last_Name = lastName,
+                    Date_Of_Birth = dateOfBirth,
+                    lastmenstcycle = isLastMenstCycleYes,
+                    lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
+                    motherbirthdefect = isMotherBirthDefectYes,
+                    motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
+                    firstpregnancy = isFirstPregYes,
+                    numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
+                    livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
+                    lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
+                    stillborns = binding.inputFirstpregStillborns.text.toString(),
+                    miscarriages = binding.inputFirstpregMiscarriages.text.toString(),
+                    csections = binding.inputFirstpregCsections.text.toString(),
+                    postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
+                    preginfections = binding.inputFirstpregPreginfections.text.toString(),
+                    highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
+                    othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
+                    alcoholconsump = isAlcoholConsumpYes,
+                    drinksperweek = binding.inputDropdownAlcoholconsumpYes.text.toString(),
+                    smoking = isSmokingYes,
+                    smokesperweek = binding.inputDropdownSmokingYes.text.toString(),
+                    drugs = isDrugsYes,
+                    drugtypes = binding.inputDropdownDrugsYes.text.toString(),
+                    exercise = binding.inputExercise.text.toString()
+                )
+                    val profilesCollection = firestore.collection("Patient Profiles")
 
                 // Check if a patient profile with the same information already exists
                 profilesCollection
-                    .whereEqualTo("firstname", newPatientProfile.firstname)
-                    .whereEqualTo("lastName", newPatientProfile.lastName)
+                    .whereEqualTo("firstname", newPatientProfile.First_Name)
+                    .whereEqualTo("lastName", newPatientProfile.Last_Name)
+                    .whereEqualTo("dateofbirth",newPatientProfile.Date_Of_Birth)
                     .get()
                     .addOnSuccessListener { querySnapshot ->
                         if (querySnapshot.isEmpty) {
@@ -63,6 +107,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                             val patientProfileId = documentReference.id
                                             binding.textinputeditFirstname.text?.clear()
                                             binding.textinputeditLastname.text?.clear()
+                                            binding.textinputeditDob.text?.clear()
                                             Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
                                         }
                                         .addOnFailureListener { e ->
@@ -82,7 +127,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     .addOnFailureListener { e ->
                         Toast.makeText(requireContext(), "Query failed: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
-            } else {
+                } else {
+                    // Display an error message if any of the required fields are empty
+                    Toast.makeText(requireContext(), "Please fill out First Name, Last Name, and Date of Birth", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
