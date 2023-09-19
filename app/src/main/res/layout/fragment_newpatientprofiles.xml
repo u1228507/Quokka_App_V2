@@ -676,7 +676,7 @@
                 android:textStyle="bold" />
 
             <!-- Input: Alcohol Consumption -->
-                <!-- Alcohol Consumption -->
+            <!-- Alcohol Consumption -->
             <TextView
                 android:id="@+id/inputquestion_consumealcohol"
                 android:layout_width="match_parent"

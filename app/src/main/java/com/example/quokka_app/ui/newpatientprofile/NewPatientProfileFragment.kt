@@ -2,9 +2,7 @@ package com.example.quokka_app.ui.newpatientprofile
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
@@ -26,11 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles) {
     private var _binding: FragmentNewpatientprofilesBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var auth: FirebaseAuth
-
     private lateinit var imagePicker: ActivityResultLauncher<Intent>
-    private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,24 +45,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             }
         }
 
-        // Request Permission For Images
-        permissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (isGranted) {
-                selectImage()
-            } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
+        // Select image when button is clicked
+        binding.buttonPatientprofileimage.setOnClickListener{
+            selectImage()
         }
-
-
-
-
-        binding.buttonPatientprofileimage.setOnClickListener {
-            checkPermissionAndSelectImage()
-        }
-
 
         // Save Button Listener
         auth = FirebaseAuth.getInstance()
@@ -143,9 +123,8 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                     val subcollectionRef = newPatientDocumentRef.collection("PatientProfileInformation")
                                     subcollectionRef
                                         .add(newPatientProfile)
-                                        .addOnSuccessListener { documentReference ->
+                                        .addOnSuccessListener { _ ->
                                             // Patient profile saved successfully
-                                            val patientProfileId = documentReference.id
                                             binding.textinputeditFirstname.text?.clear()
                                             binding.textinputeditLastname.text?.clear()
                                             binding.textinputeditDob.text?.clear()
@@ -395,22 +374,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         binding.inputDropdownDrugs.setAdapter(drugsArrayAdapter)
     }
 
-// Permission Launcher
-    private val mediaPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-        android.Manifest.permission.READ_MEDIA_IMAGES
-        } else {
-             android.Manifest.permission.READ_EXTERNAL_STORAGE
-                }
-
-    private fun checkPermissionAndSelectImage() {
-        if (ContextCompat.checkSelfPermission(requireContext(), mediaPermission) == PackageManager.PERMISSION_GRANTED) {
-            selectImage()
-        } else {
-            permissionLauncher.launch(mediaPermission)
-        }
-    }
-
-
     // Select Image for Patient Profile:
     private fun selectImage(){
         val intent = Intent(Intent.ACTION_PICK)
@@ -418,3 +381,4 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         imagePicker.launch(intent)
     }
 }
+
