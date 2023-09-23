@@ -19,12 +19,18 @@ import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentNewpatientprofilesBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.app.DatePickerDialog
+import android.widget.DatePicker
+import java.util.Calendar
+import java.util.Locale
+
 
 class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles) {
     private var _binding: FragmentNewpatientprofilesBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var imagePicker: ActivityResultLauncher<Intent>
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,33 +66,36 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 val firstName = binding.textinputeditFirstname.text.toString()
                 val lastName = binding.textinputeditLastname.text.toString()
                 val dateOfBirth = binding.textinputeditDob.text.toString()
-
                 if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty()) {
 
-                // Boolean Inputs:
                 val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
-                val isLastMenstCycleYes = lastmenstcycleText.equals("yes", ignoreCase = true)
-                val motherbirthdefectText = binding.inputDropdownMotherbirthdefectYes.text.toString()
-                val isMotherBirthDefectYes = motherbirthdefectText.equals("yes",ignoreCase = true)
+                val motherbirthdefectText = binding.inputDropdownMotherbirthdefect.text.toString()
                 val firstpregText = binding.inputDropdownFirstpreg.text.toString()
-                val isFirstPregYes = firstpregText.equals("yes",ignoreCase = true)
                 val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
-                val isAlcoholConsumpYes = alcoholconsumpText.equals("yes",ignoreCase = true)
                 val smokingText = binding.inputDropdownSmoking.text.toString()
-                val isSmokingYes = smokingText.equals("yes",ignoreCase = true)
                 val drugsText = binding.inputDropdownDrugs.text.toString()
-                val isDrugsYes = drugsText.equals("yes",ignoreCase = true)
+                val pregseizuresText = binding.inputDropdownSeizures.text.toString()
 
                 val newPatientProfile = NewPatienProfileDataClass(
                     First_Name = firstName,
                     Middle_Name = binding.textinputeditMiddlename.text.toString(),
                     Last_Name = lastName,
                     Date_Of_Birth = dateOfBirth,
-                    lastmenstcycle = isLastMenstCycleYes,
+                    Mothers_Village = binding.textinputeditMothersvillage.text.toString(),
+                    Mothers_Phone_Number = binding.textinputeditMotherscontactnumber.text.toString(),
+                    Fathers_First_Name = binding.textinputeditFathersfirstname.text.toString(),
+                    Fathers_Middle_Name = binding.textinputeditFathermiddlename.text.toString(),
+                    Fathers_Last_Name = binding.textinputeditFatherlastname.text.toString(),
+                    Fathers_Village = binding.textinputeditFathersvillage.text.toString(),
+                    Fathers_Phone_Number = binding.textinputeditFatherscontactnumber.text.toString(),
+                    FCHW_First_Name = binding.textinputeditFchwfirstname.text.toString(),
+                    FCHW_Last_Name = binding.textinputeditFchwfirstname.text.toString(),
+                    FCHW_Phone_Number = binding.textinputeditFchwcontactnumber.text.toString(),
+                    lastmenstcycle = lastmenstcycleText,
                     lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
-                    motherbirthdefect = isMotherBirthDefectYes,
+                    motherbirthdefect = motherbirthdefectText,
                     motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
-                    firstpregnancy = isFirstPregYes,
+                    firstpregnancy = firstpregText,
                     numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
                     livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
                     lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
@@ -96,15 +105,14 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
                     preginfections = binding.inputFirstpregPreginfections.text.toString(),
                     highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
+                    pregseizures = pregseizuresText,
                     othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
-                    alcoholconsump = isAlcoholConsumpYes,
-                    drinksperweek = binding.inputDropdownAlcoholconsumpYes.text.toString(),
-                    smoking = isSmokingYes,
-                    smokesperweek = binding.inputDropdownSmokingYes.text.toString(),
-                    drugs = isDrugsYes,
+                    alcoholconsump = alcoholconsumpText,
+                    smoking = smokingText,
+                    drugs = drugsText,
                     drugtypes = binding.inputDropdownDrugsYes.text.toString(),
-                    exercise = binding.inputExercise.text.toString()
                 )
+
                     val profilesCollection = firestore.collection("Patient Profiles")
 
                 // Check if a patient profile with the same information already exists
@@ -190,7 +198,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val conditionalInputMothBirthDef = binding.inputDropdownMotherbirthdefectYes
         val conditionalTextMothBirthDef = binding.conditionaltextMotherbirthdefect
 
-        initialInputMothBirthDef.addTextChangedListener(object : TextWatcher{
+        initialInputMothBirthDef.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val initialInputText = s.toString()
@@ -198,7 +206,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputLayoutMothBirthDef.visibility = View.VISIBLE
                     conditionalTextMothBirthDef.visibility = View.VISIBLE
                     conditionalInputMothBirthDef.visibility = View.VISIBLE
-                } else{
+                } else {
                     conditionalInputLayoutMothBirthDef.visibility = View.GONE
                     conditionalTextMothBirthDef.visibility = View.GONE
                 }
@@ -206,9 +214,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             override fun afterTextChanged(s: Editable?) {}
         })
 
+
         // First Pregnancy Questions
         val initialInputFirstPreg = binding.inputDropdownFirstpreg
-
         val conditionalInputLayoutFirstPreg = binding.textinputlayoutFirstpregNumprevpreg
         val conditionalInputFirstPregNumPrevPreg = binding.inputFirstpregNumprevpreg
         val conditionalInputLayoutNumLivChild = binding.textinputlayoutFirstpregNumlivchild
@@ -227,6 +235,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val conditionalInputFirstPregPregInfections = binding.inputFirstpregPreginfections
         val conditionalInputLayoutHighBPPregnancies = binding.textinputlayoutFirstpregHighbppregnancies
         val conditionalInputFirstPregHighBPPregnancies = binding.inputFirstpregHighbppregnacies
+        val conditionalInputLayoutPregSeizures = binding.textinputlayoutPregseizures
+        val conditionalInputFirstPregSeizures = binding.inputDropdownSeizures
+        val conditionalInputEditPregSeizures = binding.inputquestionPregseizures
 
         initialInputFirstPreg.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -251,6 +262,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputFirstPregPregInfections.visibility = View.VISIBLE
                     conditionalInputLayoutHighBPPregnancies.visibility = View.VISIBLE
                     conditionalInputFirstPregHighBPPregnancies.visibility = View.VISIBLE
+                    conditionalInputFirstPregSeizures.visibility = View.VISIBLE
+                    conditionalInputLayoutPregSeizures.visibility = View.VISIBLE
+                    conditionalInputEditPregSeizures.visibility = View.VISIBLE
 
                 } else{
                     conditionalInputLayoutFirstPreg.visibility = View.GONE
@@ -262,54 +276,14 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputLayoutPostpartumHemorrhages.visibility = View.GONE
                     conditionalInputLayoutPregInfections.visibility = View.GONE
                     conditionalInputLayoutHighBPPregnancies.visibility = View.GONE
+                    conditionalInputFirstPregSeizures.visibility = View.GONE
+                    conditionalInputLayoutPregSeizures.visibility = View.GONE
+                    conditionalInputEditPregSeizures.visibility = View.GONE
                 }
             }
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Alcohol Consumption Question
-        val conditionalInputLayoutAlcConsump = binding.textinputlayoutAlcoholconsumpYes
-        val initialInputAlcConsump = binding.inputDropdownAlcoholconsump
-        val conditionalInputAlcConsump = binding.inputDropdownAlcoholconsumpYes
-        val conditionalTextAlcConsump = binding.conditionaltextAlcoholconsump
-
-        initialInputAlcConsump.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val initialInputText = s.toString()
-                if (initialInputText.equals("yes", ignoreCase = true)) {
-                    conditionalInputLayoutAlcConsump.visibility = View.VISIBLE
-                    conditionalTextAlcConsump.visibility = View.VISIBLE
-                    conditionalInputAlcConsump.visibility = View.VISIBLE
-                } else{
-                    conditionalInputLayoutAlcConsump.visibility = View.GONE
-                    conditionalTextAlcConsump.visibility = View.GONE
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-        // Smoking Question
-        val conditionalInputLayoutSmoking = binding.textinputlayoutSmokingYes
-        val initialInputSmoking = binding.inputDropdownSmoking
-        val conditionalInputSmoking = binding.inputDropdownSmokingYes
-        val conditionalTextSmoking = binding.conditionaltextSmoking
-
-        initialInputSmoking.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val initialInputText = s.toString()
-                if (initialInputText.equals("yes", ignoreCase = true)) {
-                    conditionalInputLayoutSmoking.visibility = View.VISIBLE
-                    conditionalTextSmoking.visibility = View.VISIBLE
-                    conditionalInputSmoking.visibility = View.VISIBLE
-                } else{
-                    conditionalInputLayoutSmoking.visibility = View.GONE
-                    conditionalTextSmoking.visibility = View.GONE
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         // Recreational Drugs Question
         val conditionalInputLayoutDrugs = binding.textinputlayoutDrugsYes
@@ -333,11 +307,41 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        // Calendar View: Preventing Manual User Input of Dates
+        binding.textinputeditDob.isFocusable = false
+        binding.textinputlayoutDob.isClickable = true
+        binding.inputDropdownLastmenstcycleYes.isFocusable = false
+        binding.textinputlayoutLastmenstcycle.isClickable = true
+
+        // Calendar View Listening For Selecting Date Input
+        binding.textinputeditDob.setOnClickListener {
+            showDatePickerDialog()
+        }
+        binding.inputDropdownLastmenstcycleYes.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         return root
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // Calendar View
+    private fun showDatePickerDialog() {
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(requireContext(),
+            { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
+                val selectedDate = String.format(Locale.US, "%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
+                binding.textinputeditDob.setText(selectedDate)
+            }, year, month, day)
+
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis // Set max date as today
+        datePickerDialog.show()
     }
 
     // Drop Down Menus
@@ -357,6 +361,11 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val firstpregnancy = resources.getStringArray(R.array.newpatient_input_firstpreg)
         val firstpregArrayAdapter = ArrayAdapter(requireContext(), R.layout.newpatientinputs_dropdownmenus, firstpregnancy)
         binding.inputDropdownFirstpreg.setAdapter(firstpregArrayAdapter)
+
+        // Pregnancy Seizures
+        val pregseizures = resources.getStringArray(R.array.newpatient_input_pregseizures)
+        val pregseizuresArrayAdapter = ArrayAdapter(requireContext(),R.layout.newpatientinputs_dropdownmenus, pregseizures)
+        binding.inputDropdownSeizures.setAdapter(pregseizuresArrayAdapter)
 
         // Alcohol Consumption
         val alcoholconsump = resources.getStringArray(R.array.newpatient_input_alcoholconsump)
