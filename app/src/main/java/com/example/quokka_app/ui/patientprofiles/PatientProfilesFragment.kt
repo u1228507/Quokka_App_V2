@@ -52,15 +52,19 @@ class PatientProfilesFragment : Fragment() {
                 val sortedList = mutableListOf<PatientProfilesDataClass>()
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        sortedList.add(dc.document.toObject(PatientProfilesDataClass::class.java))
+                        // Fetch the image URL from Firestore and set it in PatientProfilesDataClass
+                        val patientProfile = dc.document.toObject(PatientProfilesDataClass::class.java)
+                        patientProfile.imageUrl = dc.document.getString("imageUrl")
+                        sortedList.add(patientProfile)
                     }
                 }
-                sortedList.sortBy { it.last_Name }
+                sortedList.sortBy { it.lastname }
                 val startInsertPosition = patientProfilesDataClassArrayList.size
                 patientProfilesDataClassArrayList.addAll(sortedList)
                 patientProfilesAdapter.notifyItemRangeInserted(startInsertPosition, sortedList.size)
             }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

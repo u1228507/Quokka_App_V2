@@ -19,6 +19,7 @@ import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentNewpatientprofilesBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import android.app.DatePickerDialog
 import android.widget.DatePicker
 import java.util.Calendar
@@ -31,6 +32,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
     private lateinit var auth: FirebaseAuth
     private lateinit var imagePicker: ActivityResultLauncher<Intent>
     private val calendar = Calendar.getInstance()
+    private var selectedImageURI: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,8 +48,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         {result ->
             if(result.resultCode == Activity.RESULT_OK){
                 val data : Intent? = result.data
-                val selectedImageURI : Uri? = data?.data
-                binding.PatientProfilePicture.setImageURI(selectedImageURI)
+                if(data != null) {
+                    selectedImageURI = data.data
+                    binding.PatientProfilePicture.setImageURI(selectedImageURI)
+                }
             }
         }
 
@@ -67,99 +71,170 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 val lastName = binding.textinputeditLastname.text.toString()
                 val dateOfBirth = binding.textinputeditDob.text.toString()
                 if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty()) {
+                    val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
+                    val motherbirthdefectText = binding.inputDropdownMotherbirthdefect.text.toString()
+                    val firstpregText = binding.inputDropdownFirstpreg.text.toString()
+                    val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
+                    val smokingText = binding.inputDropdownSmoking.text.toString()
+                    val drugsText = binding.inputDropdownDrugs.text.toString()
+                    val pregseizuresText = binding.inputDropdownSeizures.text.toString()
 
-                val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
-                val motherbirthdefectText = binding.inputDropdownMotherbirthdefect.text.toString()
-                val firstpregText = binding.inputDropdownFirstpreg.text.toString()
-                val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
-                val smokingText = binding.inputDropdownSmoking.text.toString()
-                val drugsText = binding.inputDropdownDrugs.text.toString()
-                val pregseizuresText = binding.inputDropdownSeizures.text.toString()
+                    val newPatientProfile = NewPatienProfileDataClass(
+                        firstname = firstName,
+                        middlename = binding.textinputeditMiddlename.text.toString(),
+                        lastname = lastName,
+                        dateofbirth = dateOfBirth,
+                        mothersvillage = binding.textinputeditMothersvillage.text.toString(),
+                        mothersphonenumber = binding.textinputeditMotherscontactnumber.text.toString(),
+                        fathersfirstname = binding.textinputeditFathersfirstname.text.toString(),
+                        fathersmiddlename = binding.textinputeditFathermiddlename.text.toString(),
+                        fatherslastname = binding.textinputeditFatherlastname.text.toString(),
+                        fathersvillage = binding.textinputeditFathersvillage.text.toString(),
+                        fathersphonenumber = binding.textinputeditFatherscontactnumber.text.toString(),
+                        fchwfirstname = binding.textinputeditFchwfirstname.text.toString(),
+                        fchwlastname = binding.textinputeditFchwfirstname.text.toString(),
+                        fchwphonenumber = binding.textinputeditFchwcontactnumber.text.toString(),
+                        lastmenstcycle = lastmenstcycleText,
+                        lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
+                        motherbirthdefect = motherbirthdefectText,
+                        motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
+                        firstpregnancy = firstpregText,
+                        numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
+                        livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
+                        lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
+                        stillborns = binding.inputFirstpregStillborns.text.toString(),
+                        miscarriages = binding.inputFirstpregMiscarriages.text.toString(),
+                        csections = binding.inputFirstpregCsections.text.toString(),
+                        postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
+                        preginfections = binding.inputFirstpregPreginfections.text.toString(),
+                        highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
+                        pregseizures = pregseizuresText,
+                        othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
+                        alcoholconsump = alcoholconsumpText,
+                        smoking = smokingText,
+                        drugs = drugsText,
+                        drugtypes = binding.inputDropdownDrugsYes.text.toString(),
+                    )
+                    if (selectedImageURI != null) {
+                        val timeStamp = System.currentTimeMillis().toString()
+                        val storageRef = FirebaseStorage.getInstance().reference
+                        val foldername = "Patient Profile Images"
+                        val imageRef = storageRef.child("$foldername/$userId/$timeStamp")
+                        imageRef.putFile(selectedImageURI!!)
+                            .addOnSuccessListener { _ ->
+                                imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
+                                    newPatientProfile.imageUrl = imageUrl.toString()
 
-                val newPatientProfile = NewPatienProfileDataClass(
-                    First_Name = firstName,
-                    Middle_Name = binding.textinputeditMiddlename.text.toString(),
-                    Last_Name = lastName,
-                    Date_Of_Birth = dateOfBirth,
-                    Mothers_Village = binding.textinputeditMothersvillage.text.toString(),
-                    Mothers_Phone_Number = binding.textinputeditMotherscontactnumber.text.toString(),
-                    Fathers_First_Name = binding.textinputeditFathersfirstname.text.toString(),
-                    Fathers_Middle_Name = binding.textinputeditFathermiddlename.text.toString(),
-                    Fathers_Last_Name = binding.textinputeditFatherlastname.text.toString(),
-                    Fathers_Village = binding.textinputeditFathersvillage.text.toString(),
-                    Fathers_Phone_Number = binding.textinputeditFatherscontactnumber.text.toString(),
-                    FCHW_First_Name = binding.textinputeditFchwfirstname.text.toString(),
-                    FCHW_Last_Name = binding.textinputeditFchwfirstname.text.toString(),
-                    FCHW_Phone_Number = binding.textinputeditFchwcontactnumber.text.toString(),
-                    lastmenstcycle = lastmenstcycleText,
-                    lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
-                    motherbirthdefect = motherbirthdefectText,
-                    motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
-                    firstpregnancy = firstpregText,
-                    numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
-                    livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
-                    lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
-                    stillborns = binding.inputFirstpregStillborns.text.toString(),
-                    miscarriages = binding.inputFirstpregMiscarriages.text.toString(),
-                    csections = binding.inputFirstpregCsections.text.toString(),
-                    postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
-                    preginfections = binding.inputFirstpregPreginfections.text.toString(),
-                    highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
-                    pregseizures = pregseizuresText,
-                    othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
-                    alcoholconsump = alcoholconsumpText,
-                    smoking = smokingText,
-                    drugs = drugsText,
-                    drugtypes = binding.inputDropdownDrugsYes.text.toString(),
-                )
+                                    val profilesCollection =
+                                        firestore.collection("Patient Profiles")
 
-                    val profilesCollection = firestore.collection("Patient Profiles")
+                                    // Check if a patient profile with the same information already exists
+                                    profilesCollection
+                                        .whereEqualTo("firstname", newPatientProfile.firstname)
+                                        .whereEqualTo("lastName", newPatientProfile.lastname)
+                                        .whereEqualTo("dateofbirth", newPatientProfile.dateofbirth)
+                                        .get()
+                                        .addOnSuccessListener { querySnapshot ->
+                                            if (querySnapshot.isEmpty) {
+                                                // No duplicate profile found, proceed to save
+                                                val newPatientDocumentRef =
+                                                    profilesCollection.document()
+                                                newPatientDocumentRef
+                                                    .set(newPatientProfile)
+                                                    .addOnSuccessListener {
+                                                        val subcollectionRef =
+                                                            newPatientDocumentRef.collection("PatientProfileInformation")
+                                                        subcollectionRef
+                                                            .add(newPatientProfile)
+                                                            .addOnSuccessListener { _ ->
+                                                                // Patient profile saved successfully
+                                                                    // Clear all input fields when saved:
+                                                                binding.textinputeditFirstname.text?.clear()
+                                                                binding.textinputeditMiddlename.text?.clear()
+                                                                binding.textinputeditLastname.text?.clear()
+                                                                binding.textinputeditDob.text?.clear()
+                                                                binding.textinputeditMothersvillage.text?.clear()
+                                                                binding.textinputeditMotherscontactnumber.text?.clear()
+                                                                binding.textinputeditFathersfirstname.text?.clear()
+                                                                binding.textinputeditFathermiddlename.text?.clear()
+                                                                binding.textinputeditFatherlastname.text?.clear()
+                                                                binding.textinputeditFathersvillage.text?.clear()
+                                                                binding.textinputeditFatherscontactnumber.text?.clear()
+                                                                binding.textinputeditFchwfirstname.text?.clear()
+                                                                binding.textinputeditFchwlastname.text?.clear()
+                                                                binding.textinputeditFchwcontactnumber.text?.clear()
+                                                                binding.inputDropdownLastmenstcycle.text?.clear()
+                                                                binding.inputDropdownMotherbirthdefect.text?.clear()
+                                                                binding.inputFirstpregNumprevpreg.text?.clear()
+                                                                binding.inputFirstpregNumlivchil.text?.clear()
+                                                                binding.inputFirstpregLowweight.text?.clear()
+                                                                binding.inputFirstpregStillborns.text?.clear()
+                                                                binding.inputFirstpregMiscarriages.text?.clear()
+                                                                binding.inputFirstpregCsections.text?.clear()
+                                                                binding.inputFirstpregPostpartumhemorrages.text?.clear()
+                                                                binding.inputFirstpregPreginfections.text?.clear()
+                                                                binding.inputFirstpregHighbppregnacies.text?.clear()
+                                                                binding.textinputeditPersonalmedicalother.text?.clear()
+                                                                binding.inputDropdownDrugsYes.text?.clear()
+                                                                binding.inputDropdownLastmenstcycle.setText("Unknown", false)
+                                                                binding.inputDropdownMotherbirthdefect.setText("Unknown", false)
+                                                                binding.inputDropdownFirstpreg.setText("Unknown", false)
+                                                                binding.inputDropdownAlcoholconsump.setText("Unknown", false)
+                                                                binding.inputDropdownSmoking.setText("Unknown", false)
+                                                                binding.inputDropdownDrugs.setText("Unknown", false)
+                                                                binding.inputDropdownDrugs.setAdapter(null) // Clear any suggestions
+                                                                binding.inputDropdownLastmenstcycle.setAdapter(null)
+                                                                binding.inputDropdownMotherbirthdefect.setAdapter(null)
+                                                                selectedImageURI = null
+                                                                binding.PatientProfilePicture.setImageResource(R.drawable.baseline_person_24_purple)
 
-                // Check if a patient profile with the same information already exists
-                profilesCollection
-                    .whereEqualTo("firstname", newPatientProfile.First_Name)
-                    .whereEqualTo("lastName", newPatientProfile.Last_Name)
-                    .whereEqualTo("dateofbirth",newPatientProfile.Date_Of_Birth)
-                    .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        if (querySnapshot.isEmpty) {
-                            // No duplicate profile found, proceed to save
-                            val newPatientDocumentRef = profilesCollection.document()
-                            newPatientDocumentRef
-                                .set(newPatientProfile)
-                                .addOnSuccessListener {
-                                    val subcollectionRef = newPatientDocumentRef.collection("PatientProfileInformation")
-                                    subcollectionRef
-                                        .add(newPatientProfile)
-                                        .addOnSuccessListener { _ ->
-                                            // Patient profile saved successfully
-                                            binding.textinputeditFirstname.text?.clear()
-                                            binding.textinputeditLastname.text?.clear()
-                                            binding.textinputeditDob.text?.clear()
-                                            Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Patient profile saved successfully",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+                                                            .addOnFailureListener { e ->
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Failed to save patient profile: ${e.message}",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Failed to save patient profile: ${e.message}",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+
+
+                                            } else {
+                                                // A duplicate patient profile exists
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Patient profile already exists",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
                                         }
                                         .addOnFailureListener { e ->
-                                            Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Query failed: ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                 }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
-                        } else {
-                            // A duplicate patient profile exists
-                            Toast.makeText(requireContext(), "Patient profile already exists", Toast.LENGTH_SHORT).show()
-                        }
+                            }
+                    } else {
+                        // Continue with saving the patient profile data without an image
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), "Query failed: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    // Display an error message if any of the required fields are empty
-                    Toast.makeText(requireContext(), "Please fill out First Name, Last Name, and Date of Birth", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
 
         // Defines Errors For Text Inputs:
               // First Name Error:
@@ -389,5 +464,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
+
 }
 
