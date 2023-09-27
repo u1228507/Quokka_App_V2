@@ -92,7 +92,7 @@
     <string name="newpatient_inputheader_motherpersonalinfo">Mother\'s Personal Information:</string>
     <string name="newpatient_inputheader_fatherpersonalinfo">Father\'s Personal Information:</string>
     <string name="newpatient_inputheader_fchwpersonalinfo">Female Community Health Worker\'s (FCHW) Personal Information:</string>
-    <string name="newpatient_inputheader_unknownquestion">If patient does not know or does not want to answer any non-required question, please leave blank.</string>
+    <string name="newpatient_inputheader_unknownquestion">If patient does not know or does not want to answer any non-required question, please leave blank or select the option \'Unknown\'.</string>
     <string name="newpatient_inputheader_patientprofilepic">Patient Profile Image: </string>
     <string name="newpatient_input_header_personalmedicalhistory">Personal Medical History:</string>
     <string name="newpatient_conditional_lastmenstrualcycle">What day did the patients last menstrual cycle begin?</string>

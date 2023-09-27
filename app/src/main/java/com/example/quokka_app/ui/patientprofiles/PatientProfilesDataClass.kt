@@ -4,6 +4,5 @@ data class PatientProfilesDataClass(
     var firstname : String? = null,
     var lastname : String? = null,
     var dateofbirth: String? = null,
-    var imageUrl: String?
-) {
-}
+    var imageUrl: String? = null
+)
