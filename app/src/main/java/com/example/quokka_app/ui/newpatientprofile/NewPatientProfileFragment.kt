@@ -19,12 +19,20 @@ import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentNewpatientprofilesBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import android.app.DatePickerDialog
+import android.widget.DatePicker
+import java.util.Calendar
+import java.util.Locale
+
 
 class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles) {
     private var _binding: FragmentNewpatientprofilesBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var imagePicker: ActivityResultLauncher<Intent>
+    private val calendar = Calendar.getInstance()
+    private var selectedImageURI: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +48,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         {result ->
             if(result.resultCode == Activity.RESULT_OK){
                 val data : Intent? = result.data
-                val selectedImageURI : Uri? = data?.data
-                binding.PatientProfilePicture.setImageURI(selectedImageURI)
+                if(data != null) {
+                    selectedImageURI = data.data
+                    binding.PatientProfilePicture.setImageURI(selectedImageURI)
+                }
             }
         }
 
@@ -60,98 +70,173 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 val firstName = binding.textinputeditFirstname.text.toString()
                 val lastName = binding.textinputeditLastname.text.toString()
                 val dateOfBirth = binding.textinputeditDob.text.toString()
-
+                val mothersvillage = binding.textinputeditDob.text.toString()
+                val mothersphonenumber = binding.textinputeditDob.text.toString()
                 if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty()) {
+                    val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
+                    val motherbirthdefectText = binding.inputDropdownMotherbirthdefect.text.toString()
+                    val firstpregText = binding.inputDropdownFirstpreg.text.toString()
+                    val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
+                    val smokingText = binding.inputDropdownSmoking.text.toString()
+                    val drugsText = binding.inputDropdownDrugs.text.toString()
+                    val pregseizuresText = binding.inputDropdownSeizures.text.toString()
 
-                // Boolean Inputs:
-                val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
-                val isLastMenstCycleYes = lastmenstcycleText.equals("yes", ignoreCase = true)
-                val motherbirthdefectText = binding.inputDropdownMotherbirthdefectYes.text.toString()
-                val isMotherBirthDefectYes = motherbirthdefectText.equals("yes",ignoreCase = true)
-                val firstpregText = binding.inputDropdownFirstpreg.text.toString()
-                val isFirstPregYes = firstpregText.equals("yes",ignoreCase = true)
-                val alcoholconsumpText = binding.inputDropdownAlcoholconsump.text.toString()
-                val isAlcoholConsumpYes = alcoholconsumpText.equals("yes",ignoreCase = true)
-                val smokingText = binding.inputDropdownSmoking.text.toString()
-                val isSmokingYes = smokingText.equals("yes",ignoreCase = true)
-                val drugsText = binding.inputDropdownDrugs.text.toString()
-                val isDrugsYes = drugsText.equals("yes",ignoreCase = true)
+                    val newPatientProfile = NewPatienProfileDataClass(
+                        firstname = firstName,
+                        middlename = binding.textinputeditMiddlename.text.toString(),
+                        lastname = lastName,
+                        dateofbirth = dateOfBirth,
+                        mothersvillage = mothersvillage,
+                        mothersphonenumber = mothersphonenumber,
+                        fathersfirstname = binding.textinputeditFathersfirstname.text.toString(),
+                        fathersmiddlename = binding.textinputeditFathermiddlename.text.toString(),
+                        fatherslastname = binding.textinputeditFatherlastname.text.toString(),
+                        fathersvillage = binding.textinputeditFathersvillage.text.toString(),
+                        fathersphonenumber = binding.textinputeditFatherscontactnumber.text.toString(),
+                        fchwfirstname = binding.textinputeditFchwfirstname.text.toString(),
+                        fchwlastname = binding.textinputeditFchwfirstname.text.toString(),
+                        fchwphonenumber = binding.textinputeditFchwcontactnumber.text.toString(),
+                        lastmenstcycle = lastmenstcycleText,
+                        lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
+                        motherbirthdefect = motherbirthdefectText,
+                        motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
+                        firstpregnancy = firstpregText,
+                        numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
+                        livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
+                        lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
+                        stillborns = binding.inputFirstpregStillborns.text.toString(),
+                        miscarriages = binding.inputFirstpregMiscarriages.text.toString(),
+                        csections = binding.inputFirstpregCsections.text.toString(),
+                        postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
+                        preginfections = binding.inputFirstpregPreginfections.text.toString(),
+                        highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
+                        pregseizures = pregseizuresText,
+                        othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
+                        alcoholconsump = alcoholconsumpText,
+                        smoking = smokingText,
+                        drugs = drugsText,
+                        drugtypes = binding.inputDropdownDrugsYes.text.toString(),
+                    )
+                    if (selectedImageURI != null) {
+                        val timeStamp = System.currentTimeMillis().toString()
+                        val storageRef = FirebaseStorage.getInstance().reference
+                        val foldername = "Patient Profile Images"
+                        val imageRef = storageRef.child("$foldername/$userId/$timeStamp")
+                        imageRef.putFile(selectedImageURI!!)
+                            .addOnSuccessListener { _ ->
+                                imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
+                                    newPatientProfile.imageUrl = imageUrl.toString()
 
-                val newPatientProfile = NewPatienProfileDataClass(
-                    First_Name = firstName,
-                    Middle_Name = binding.textinputeditMiddlename.text.toString(),
-                    Last_Name = lastName,
-                    Date_Of_Birth = dateOfBirth,
-                    lastmenstcycle = isLastMenstCycleYes,
-                    lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
-                    motherbirthdefect = isMotherBirthDefectYes,
-                    motherbirthdefecttype = binding.inputDropdownMotherbirthdefectYes.text.toString(),
-                    firstpregnancy = isFirstPregYes,
-                    numpregn = binding.inputFirstpregNumprevpreg.text.toString(),
-                    livingchildren = binding.inputFirstpregNumlivchil.text.toString(),
-                    lowbirthweight = binding.inputFirstpregLowweight.text.toString(),
-                    stillborns = binding.inputFirstpregStillborns.text.toString(),
-                    miscarriages = binding.inputFirstpregMiscarriages.text.toString(),
-                    csections = binding.inputFirstpregCsections.text.toString(),
-                    postpartumhemorrhages = binding.inputFirstpregPostpartumhemorrages.text.toString(),
-                    preginfections = binding.inputFirstpregPreginfections.text.toString(),
-                    highBPpregn = binding.inputFirstpregHighbppregnacies.text.toString(),
-                    othermedhist = binding.textinputeditPersonalmedicalother.text.toString(),
-                    alcoholconsump = isAlcoholConsumpYes,
-                    drinksperweek = binding.inputDropdownAlcoholconsumpYes.text.toString(),
-                    smoking = isSmokingYes,
-                    smokesperweek = binding.inputDropdownSmokingYes.text.toString(),
-                    drugs = isDrugsYes,
-                    drugtypes = binding.inputDropdownDrugsYes.text.toString(),
-                    exercise = binding.inputExercise.text.toString()
-                )
-                    val profilesCollection = firestore.collection("Patient Profiles")
+                                    val profilesCollection =
+                                        firestore.collection("Patient Profiles")
 
-                // Check if a patient profile with the same information already exists
-                profilesCollection
-                    .whereEqualTo("firstname", newPatientProfile.First_Name)
-                    .whereEqualTo("lastName", newPatientProfile.Last_Name)
-                    .whereEqualTo("dateofbirth",newPatientProfile.Date_Of_Birth)
-                    .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        if (querySnapshot.isEmpty) {
-                            // No duplicate profile found, proceed to save
-                            val newPatientDocumentRef = profilesCollection.document()
-                            newPatientDocumentRef
-                                .set(newPatientProfile)
-                                .addOnSuccessListener {
-                                    val subcollectionRef = newPatientDocumentRef.collection("PatientProfileInformation")
-                                    subcollectionRef
-                                        .add(newPatientProfile)
-                                        .addOnSuccessListener { _ ->
-                                            // Patient profile saved successfully
-                                            binding.textinputeditFirstname.text?.clear()
-                                            binding.textinputeditLastname.text?.clear()
-                                            binding.textinputeditDob.text?.clear()
-                                            Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
+                                    // Check if a patient profile with the same information already exists
+                                    profilesCollection
+                                        .whereEqualTo("firstname", newPatientProfile.firstname)
+                                        .whereEqualTo("lastName", newPatientProfile.lastname)
+                                        .whereEqualTo("dateofbirth", newPatientProfile.dateofbirth)
+                                        .get()
+                                        .addOnSuccessListener { querySnapshot ->
+                                            if (querySnapshot.isEmpty) {
+                                                // No duplicate profile found, proceed to save
+                                                val newPatientDocumentRef =
+                                                    profilesCollection.document()
+                                                newPatientDocumentRef
+                                                    .set(newPatientProfile)
+                                                    .addOnSuccessListener {
+                                                        val subcollectionRef =
+                                                            newPatientDocumentRef.collection("PatientProfileInformation")
+                                                        subcollectionRef
+                                                            .add(newPatientProfile)
+                                                            .addOnSuccessListener { _ ->
+                                                                // Patient profile saved successfully
+                                                                    // Clear all input fields when saved:
+                                                                binding.textinputeditFirstname.text?.clear()
+                                                                binding.textinputeditMiddlename.text?.clear()
+                                                                binding.textinputeditLastname.text?.clear()
+                                                                binding.textinputeditDob.text?.clear()
+                                                                binding.textinputeditMothersvillage.text?.clear()
+                                                                binding.textinputeditMotherscontactnumber.text?.clear()
+                                                                binding.textinputeditFathersfirstname.text?.clear()
+                                                                binding.textinputeditFathermiddlename.text?.clear()
+                                                                binding.textinputeditFatherlastname.text?.clear()
+                                                                binding.textinputeditFathersvillage.text?.clear()
+                                                                binding.textinputeditFatherscontactnumber.text?.clear()
+                                                                binding.textinputeditFchwfirstname.text?.clear()
+                                                                binding.textinputeditFchwlastname.text?.clear()
+                                                                binding.textinputeditFchwcontactnumber.text?.clear()
+                                                                binding.inputDropdownLastmenstcycle.text?.clear()
+                                                                binding.inputDropdownMotherbirthdefect.text?.clear()
+                                                                binding.inputFirstpregNumprevpreg.text?.clear()
+                                                                binding.inputFirstpregNumlivchil.text?.clear()
+                                                                binding.inputFirstpregLowweight.text?.clear()
+                                                                binding.inputFirstpregStillborns.text?.clear()
+                                                                binding.inputFirstpregMiscarriages.text?.clear()
+                                                                binding.inputFirstpregCsections.text?.clear()
+                                                                binding.inputFirstpregPostpartumhemorrages.text?.clear()
+                                                                binding.inputFirstpregPreginfections.text?.clear()
+                                                                binding.inputFirstpregHighbppregnacies.text?.clear()
+                                                                binding.textinputeditPersonalmedicalother.text?.clear()
+                                                                binding.inputDropdownDrugsYes.text?.clear()
+                                                                binding.inputDropdownLastmenstcycle.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownMotherbirthdefect.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownFirstpreg.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownAlcoholconsump.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownSmoking.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownDrugs.setText(R.string.newpatient_input_unknown)
+                                                                binding.inputDropdownDrugs.setAdapter(null) // Clear any suggestions
+                                                                binding.inputDropdownLastmenstcycle.setAdapter(null)
+                                                                binding.inputDropdownMotherbirthdefect.setAdapter(null)
+                                                                selectedImageURI = null
+                                                                binding.PatientProfilePicture.setImageResource(R.drawable.baseline_person_24_purple)
+
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Patient profile saved successfully",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+                                                            .addOnFailureListener { e ->
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Failed to save patient profile: ${e.message}",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Failed to save patient profile: ${e.message}",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+
+
+                                            } else {
+                                                // A duplicate patient profile exists
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Patient profile already exists",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
                                         }
                                         .addOnFailureListener { e ->
-                                            Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Query failed: ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                 }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(requireContext(), "Failed to save patient profile: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
-                        } else {
-                            // A duplicate patient profile exists
-                            Toast.makeText(requireContext(), "Patient profile already exists", Toast.LENGTH_SHORT).show()
-                        }
+                            }
+                    } else {
+                        // Continue with saving the patient profile data without an image
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), "Query failed: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    // Display an error message if any of the required fields are empty
-                    Toast.makeText(requireContext(), "Please fill out First Name, Last Name, and Date of Birth", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
 
         // Defines Errors For Text Inputs:
               // First Name Error:
@@ -160,6 +245,249 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         } else if(text.length < 30){
             binding.textinputlayoutFirstname.error = null }
         }
+            // Middle Name Error:
+        binding.textinputeditMiddlename.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutMiddlename.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutMiddlename.error = null }
+        }
+            // Last Name Error:
+        binding.textinputeditLastname.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutLastname.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutLastname.error = null }
+        }
+
+            // Mothers Village Error:
+        binding.textinputeditMothersvillage.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 50) { binding.textinputlayoutMothervillage.error = "Error: Too Many Characters"
+            } else if(text.length < 50){
+                binding.textinputlayoutMothervillage.error = null }
+        }
+
+        // Mothers Phone Number:
+        binding.textinputeditMotherscontactnumber.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 10) { binding.textinputlayoutMotherscontactnumber.error = "Error: Too Many Characters"
+            } else if(text.length < 10){
+                binding.textinputlayoutMotherscontactnumber.error = null }
+        }
+
+        // Fathers First Name:
+        binding.textinputeditFathersfirstname.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutFatherfirstname.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutFatherfirstname.error = null }
+        }
+
+        // Fathers Middle Name:
+        binding.textinputeditFathermiddlename.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutFathermiddlename.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutFathermiddlename.error = null }
+        }
+
+        // Fathers Last Name:
+        binding.textinputeditFatherlastname.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutFatherlastname.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutFatherlastname.error = null }
+        }
+
+        // Fathers Village Name:
+        binding.textinputeditFathersvillage.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 50) { binding.textinputlayoutFathervillage.error = "Error: Too Many Characters"
+            } else if(text.length < 50){
+                binding.textinputlayoutFathervillage.error = null }
+        }
+
+        // Fathers Contact Number:
+        binding.textinputeditFatherscontactnumber.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 10) { binding.textinputlayoutFatherscontactnumber.error = "Error: Too Many Characters"
+            } else if(text.length < 10){
+                binding.textinputlayoutFatherscontactnumber.error = null }
+        }
+
+        // FCHW First Name
+        binding.textinputeditFchwfirstname.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutFchwfirstname.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutFchwfirstname.error = null }
+        }
+
+        // FCHW Last Name
+        binding.textinputeditFchwlastname.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 30) { binding.textinputlayoutFchwlastname.error = "Error: Too Many Characters"
+            } else if(text.length < 30){
+                binding.textinputlayoutFchwlastname.error = null }
+        }
+
+        // FCHW Contact Number
+        binding.textinputeditFchwcontactnumber.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 10) { binding.textinputlayoutFchwcontactnumber.error = "Error: Too Many Characters"
+            } else if(text.length < 10){
+                binding.textinputlayoutFchwcontactnumber.error = null }
+        }
+
+        // Mother Birth Defect
+        binding.inputDropdownMotherbirthdefectYes.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 100) { binding.textinputlayoutMotherbirthdefectYes.error = "Error: Too Many Characters"
+            } else if(text.length < 100){
+                binding.textinputlayoutMotherbirthdefectYes.error = null }
+        }
+
+        // Number of Living Children
+        binding.inputFirstpregNumlivchil.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 2) { binding.textinputlayoutFirstpregNumlivchild.error = "Error: Too Many Characters"
+            } else if(text.length < 2){
+                binding.textinputlayoutFirstpregNumlivchild.error = null }
+        }
+
+        // Number of Previous Pregnancies
+        binding.inputFirstpregNumprevpreg.doOnTextChanged { text, _, _, _ ->
+            val pastPregnancies = text?.toString()?.toIntOrNull() ?: 0 // Convert input to an integer or use 0 as a default value
+
+            if (text!!.length > 2) {
+                binding.textinputlayoutFirstpregNumprevpreg.error = "Error: Too Many Characters"
+            } else {
+                binding.textinputlayoutFirstpregNumprevpreg.error = null // Clear any previous error
+            }
+
+            // Number of Low Birth Weights
+            binding.inputFirstpregLowweight.doOnTextChanged { text1, _, _, _ ->
+                if (text1!!.isNotBlank()) {
+                    val inputValue = text1.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregLowweight.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text1.length > 2) {
+                        binding.textinputlayoutFirstpregLowweight.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregLowweight.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregLowweight.error = null
+                }
+            }
+            // Number of Still Borns
+            binding.inputFirstpregStillborns.doOnTextChanged { text2, _, _, _ ->
+                if (text2!!.isNotBlank()) {
+                    val inputValue = text2.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregStillborns.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text2.length > 2) {
+                        binding.textinputlayoutFirstpregStillborns.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregStillborns.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregLowweight.error = null
+                }
+            }
+            // Number of Low Birth Weights
+            binding.inputFirstpregLowweight.doOnTextChanged { text3, _, _, _ ->
+                if (text3!!.isNotBlank()) {
+                    val inputValue = text3.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregLowweight.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text3.length > 2) {
+                        binding.textinputlayoutFirstpregLowweight.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregLowweight.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregLowweight.error = null
+                }
+            }
+            // Number of Miscarriages
+            binding.inputFirstpregMiscarriages.doOnTextChanged { text4, _, _, _ ->
+                if (text4!!.isNotBlank()) {
+                    val inputValue = text4.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregMiscarriages.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text4.length > 2) {
+                        binding.textinputlayoutFirstpregMiscarriages.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregMiscarriages.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregMiscarriages.error = null
+                }
+            }
+            // Number of C-Sections
+            binding.inputFirstpregCsections.doOnTextChanged { text5, _, _, _ ->
+                if (text5!!.isNotBlank()) {
+                    val inputValue = text5.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregCsections.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text5.length > 2) {
+                        binding.textinputlayoutFirstpregCsections.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregCsections.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregCsections.error = null
+                }
+            }
+            // Number of Postpartum Hemorrhages
+            binding.inputFirstpregPostpartumhemorrages.doOnTextChanged { text6, _, _, _ ->
+                if (text6!!.isNotBlank()) {
+                    val inputValue = text6.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregPostpartumhemorrhages.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text6.length > 2) {
+                        binding.textinputlayoutFirstpregPostpartumhemorrhages.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregPostpartumhemorrhages.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregPostpartumhemorrhages.error = null
+                }
+            }
+            // Number of Pregnancy Infections
+            binding.inputFirstpregPreginfections.doOnTextChanged { text7, _, _, _ ->
+                if (text7!!.isNotBlank()) {
+                    val inputValue = text7.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregPreginfections.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text7.length > 2) {
+                        binding.textinputlayoutFirstpregPreginfections.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregPreginfections.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregPreginfections.error = null
+                }
+            }
+            // High BP Blood Pressure Pregnancies
+            binding.inputFirstpregHighbppregnacies.doOnTextChanged { text8, _, _, _ ->
+                if (text8!!.isNotBlank()) {
+                    val inputValue = text8.toString().toInt()
+                    if (inputValue > pastPregnancies) {
+                        binding.textinputlayoutFirstpregHighbppregnancies.error = "Error: Value cannot be greater than past pregnancies"
+                    } else if (text8.length > 2) {
+                        binding.textinputlayoutFirstpregHighbppregnancies.error = "Error: Too Many Characters"
+                    } else {
+                        binding.textinputlayoutFirstpregHighbppregnancies.error = null
+                    }
+                } else {
+                    binding.textinputlayoutFirstpregHighbppregnancies.error = null
+                }
+            }
+        }
+
+        // Other Personal Medical History
+        binding.textinputeditPersonalmedicalother.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 200) { binding.textinputlayoutPersonalmedicalother.error = "Error: Too Many Characters"
+            } else if(text.length < 200){
+                binding.textinputlayoutPersonalmedicalother.error = null }
+        }
+
+        // Type of Drugs Errors
+        binding.inputDropdownDrugsYes.doOnTextChanged { text, _, _, _ ->
+            if(text!!.length > 100) { binding.textinputlayoutDrugsYes.error = "Error: Too Many Characters"
+            } else if(text.length < 100){
+                binding.textinputlayoutDrugsYes.error = null }
+        }
+
 
         // Conditional Visibility Logic
             // Menstrual Cycle Question
@@ -190,7 +518,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val conditionalInputMothBirthDef = binding.inputDropdownMotherbirthdefectYes
         val conditionalTextMothBirthDef = binding.conditionaltextMotherbirthdefect
 
-        initialInputMothBirthDef.addTextChangedListener(object : TextWatcher{
+        initialInputMothBirthDef.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val initialInputText = s.toString()
@@ -198,7 +526,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputLayoutMothBirthDef.visibility = View.VISIBLE
                     conditionalTextMothBirthDef.visibility = View.VISIBLE
                     conditionalInputMothBirthDef.visibility = View.VISIBLE
-                } else{
+                } else {
                     conditionalInputLayoutMothBirthDef.visibility = View.GONE
                     conditionalTextMothBirthDef.visibility = View.GONE
                 }
@@ -206,9 +534,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             override fun afterTextChanged(s: Editable?) {}
         })
 
+
         // First Pregnancy Questions
         val initialInputFirstPreg = binding.inputDropdownFirstpreg
-
         val conditionalInputLayoutFirstPreg = binding.textinputlayoutFirstpregNumprevpreg
         val conditionalInputFirstPregNumPrevPreg = binding.inputFirstpregNumprevpreg
         val conditionalInputLayoutNumLivChild = binding.textinputlayoutFirstpregNumlivchild
@@ -227,6 +555,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val conditionalInputFirstPregPregInfections = binding.inputFirstpregPreginfections
         val conditionalInputLayoutHighBPPregnancies = binding.textinputlayoutFirstpregHighbppregnancies
         val conditionalInputFirstPregHighBPPregnancies = binding.inputFirstpregHighbppregnacies
+        val conditionalInputLayoutPregSeizures = binding.textinputlayoutPregseizures
+        val conditionalInputFirstPregSeizures = binding.inputDropdownSeizures
+        val conditionalInputEditPregSeizures = binding.inputquestionPregseizures
 
         initialInputFirstPreg.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -251,6 +582,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputFirstPregPregInfections.visibility = View.VISIBLE
                     conditionalInputLayoutHighBPPregnancies.visibility = View.VISIBLE
                     conditionalInputFirstPregHighBPPregnancies.visibility = View.VISIBLE
+                    conditionalInputFirstPregSeizures.visibility = View.VISIBLE
+                    conditionalInputLayoutPregSeizures.visibility = View.VISIBLE
+                    conditionalInputEditPregSeizures.visibility = View.VISIBLE
 
                 } else{
                     conditionalInputLayoutFirstPreg.visibility = View.GONE
@@ -262,54 +596,14 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     conditionalInputLayoutPostpartumHemorrhages.visibility = View.GONE
                     conditionalInputLayoutPregInfections.visibility = View.GONE
                     conditionalInputLayoutHighBPPregnancies.visibility = View.GONE
+                    conditionalInputFirstPregSeizures.visibility = View.GONE
+                    conditionalInputLayoutPregSeizures.visibility = View.GONE
+                    conditionalInputEditPregSeizures.visibility = View.GONE
                 }
             }
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Alcohol Consumption Question
-        val conditionalInputLayoutAlcConsump = binding.textinputlayoutAlcoholconsumpYes
-        val initialInputAlcConsump = binding.inputDropdownAlcoholconsump
-        val conditionalInputAlcConsump = binding.inputDropdownAlcoholconsumpYes
-        val conditionalTextAlcConsump = binding.conditionaltextAlcoholconsump
-
-        initialInputAlcConsump.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val initialInputText = s.toString()
-                if (initialInputText.equals("yes", ignoreCase = true)) {
-                    conditionalInputLayoutAlcConsump.visibility = View.VISIBLE
-                    conditionalTextAlcConsump.visibility = View.VISIBLE
-                    conditionalInputAlcConsump.visibility = View.VISIBLE
-                } else{
-                    conditionalInputLayoutAlcConsump.visibility = View.GONE
-                    conditionalTextAlcConsump.visibility = View.GONE
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-        // Smoking Question
-        val conditionalInputLayoutSmoking = binding.textinputlayoutSmokingYes
-        val initialInputSmoking = binding.inputDropdownSmoking
-        val conditionalInputSmoking = binding.inputDropdownSmokingYes
-        val conditionalTextSmoking = binding.conditionaltextSmoking
-
-        initialInputSmoking.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val initialInputText = s.toString()
-                if (initialInputText.equals("yes", ignoreCase = true)) {
-                    conditionalInputLayoutSmoking.visibility = View.VISIBLE
-                    conditionalTextSmoking.visibility = View.VISIBLE
-                    conditionalInputSmoking.visibility = View.VISIBLE
-                } else{
-                    conditionalInputLayoutSmoking.visibility = View.GONE
-                    conditionalTextSmoking.visibility = View.GONE
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         // Recreational Drugs Question
         val conditionalInputLayoutDrugs = binding.textinputlayoutDrugsYes
@@ -333,11 +627,41 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        // Calendar View: Preventing Manual User Input of Dates
+        binding.textinputeditDob.isFocusable = false
+        binding.textinputlayoutDob.isClickable = true
+        binding.inputDropdownLastmenstcycleYes.isFocusable = false
+        binding.textinputlayoutLastmenstcycle.isClickable = true
+
+        // Calendar View Listening For Selecting Date Input
+        binding.textinputeditDob.setOnClickListener {
+            showDatePickerDialog()
+        }
+        binding.inputDropdownLastmenstcycleYes.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         return root
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // Calendar View
+    private fun showDatePickerDialog() {
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(requireContext(),
+            { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
+                val selectedDate = String.format(Locale.US, "%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
+                binding.textinputeditDob.setText(selectedDate)
+            }, year, month, day)
+
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis // Set max date as today
+        datePickerDialog.show()
     }
 
     // Drop Down Menus
@@ -357,6 +681,11 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val firstpregnancy = resources.getStringArray(R.array.newpatient_input_firstpreg)
         val firstpregArrayAdapter = ArrayAdapter(requireContext(), R.layout.newpatientinputs_dropdownmenus, firstpregnancy)
         binding.inputDropdownFirstpreg.setAdapter(firstpregArrayAdapter)
+
+        // Pregnancy Seizures
+        val pregseizures = resources.getStringArray(R.array.newpatient_input_pregseizures)
+        val pregseizuresArrayAdapter = ArrayAdapter(requireContext(),R.layout.newpatientinputs_dropdownmenus, pregseizures)
+        binding.inputDropdownSeizures.setAdapter(pregseizuresArrayAdapter)
 
         // Alcohol Consumption
         val alcoholconsump = resources.getStringArray(R.array.newpatient_input_alcoholconsump)
@@ -380,5 +709,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
+
 }
 
