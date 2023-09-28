@@ -30,6 +30,7 @@ class fragment_record_visit : AppCompatActivity() {
         binding.btnPostB.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, postVisit)
+                addToBackStack(null)
                 commit()
             }
         }
@@ -37,6 +38,7 @@ class fragment_record_visit : AppCompatActivity() {
         binding.btnPreB.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, preVisit)
+                addToBackStack(null)
                 commit()
             }
         }

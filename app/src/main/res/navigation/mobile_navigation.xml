@@ -35,4 +35,10 @@
         android:label="@string/menu_userprofile"
         tools:layout="@layout/fragment_userprofile" />
 
+    <fragment
+        android:id="@+id/nav_recordvisit"
+        android:name="com.example.quokka_app.ui.apt_view.fragment_record_visit"
+        android:label="@string/menu_recordvisit"
+        tools:layout="@layout/fragment_record_visit" />
+
 </navigation>
