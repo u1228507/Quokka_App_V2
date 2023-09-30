@@ -70,9 +70,13 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 val firstName = binding.textinputeditFirstname.text.toString()
                 val lastName = binding.textinputeditLastname.text.toString()
                 val dateOfBirth = binding.textinputeditDob.text.toString()
-                val mothersvillage = binding.textinputeditDob.text.toString()
-                val mothersphonenumber = binding.textinputeditDob.text.toString()
-                if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty()) {
+                val mothersVillage = binding.textinputeditMothersvillage.text.toString()
+                val mothersPhoneNumber = binding.textinputeditMotherscontactnumber.text.toString()
+                val fchwFirstName = binding.textinputeditFchwfirstname.text.toString()
+                val fchwLastName = binding.textinputeditFchwlastname.text.toString()
+                val fchwPhoneNumber = binding.textinputeditFchwcontactnumber.text.toString()
+                if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty() && mothersVillage.isNotEmpty() && mothersPhoneNumber.isNotEmpty() && fchwFirstName.isNotEmpty() && fchwLastName.isNotEmpty() && fchwPhoneNumber.isNotEmpty()) {
+
                     val lastmenstcycleText = binding.inputDropdownLastmenstcycle.text.toString()
                     val motherbirthdefectText = binding.inputDropdownMotherbirthdefect.text.toString()
                     val firstpregText = binding.inputDropdownFirstpreg.text.toString()
@@ -86,16 +90,16 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                         middlename = binding.textinputeditMiddlename.text.toString(),
                         lastname = lastName,
                         dateofbirth = dateOfBirth,
-                        mothersvillage = mothersvillage,
-                        mothersphonenumber = mothersphonenumber,
+                        mothersvillage = mothersVillage,
+                        mothersphonenumber = mothersPhoneNumber,
                         fathersfirstname = binding.textinputeditFathersfirstname.text.toString(),
                         fathersmiddlename = binding.textinputeditFathermiddlename.text.toString(),
                         fatherslastname = binding.textinputeditFatherlastname.text.toString(),
                         fathersvillage = binding.textinputeditFathersvillage.text.toString(),
                         fathersphonenumber = binding.textinputeditFatherscontactnumber.text.toString(),
-                        fchwfirstname = binding.textinputeditFchwfirstname.text.toString(),
-                        fchwlastname = binding.textinputeditFchwfirstname.text.toString(),
-                        fchwphonenumber = binding.textinputeditFchwcontactnumber.text.toString(),
+                        fchwfirstname = fchwFirstName,
+                        fchwlastname = fchwLastName,
+                        fchwphonenumber = fchwPhoneNumber,
                         lastmenstcycle = lastmenstcycleText,
                         lastmenstcycledate = binding.inputDropdownLastmenstcycleYes.text.toString(),
                         motherbirthdefect = motherbirthdefectText,
@@ -139,6 +143,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                         .addOnSuccessListener { querySnapshot ->
                                             if (querySnapshot.isEmpty) {
                                                 // No duplicate profile found, proceed to save
+
                                                 val newPatientDocumentRef =
                                                     profilesCollection.document()
                                                 newPatientDocumentRef
@@ -150,7 +155,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                                             .add(newPatientProfile)
                                                             .addOnSuccessListener { _ ->
                                                                 // Patient profile saved successfully
-                                                                    // Clear all input fields when saved:
+                                                                // Clear all input fields when saved:
                                                                 binding.textinputeditFirstname.text?.clear()
                                                                 binding.textinputeditMiddlename.text?.clear()
                                                                 binding.textinputeditLastname.text?.clear()
@@ -239,26 +244,26 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         }
 
         // Defines Errors For Text Inputs:
-              // First Name Error:
+        // First Name Error:
         binding.textinputeditFirstname.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 30) { binding.textinputlayoutFirstname.error = "Error: Too Many Characters"
-        } else if(text.length < 30){
-            binding.textinputlayoutFirstname.error = null }
+            } else if(text.length < 30){
+                binding.textinputlayoutFirstname.error = null }
         }
-            // Middle Name Error:
+        // Middle Name Error:
         binding.textinputeditMiddlename.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 30) { binding.textinputlayoutMiddlename.error = "Error: Too Many Characters"
             } else if(text.length < 30){
                 binding.textinputlayoutMiddlename.error = null }
         }
-            // Last Name Error:
+        // Last Name Error:
         binding.textinputeditLastname.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 30) { binding.textinputlayoutLastname.error = "Error: Too Many Characters"
             } else if(text.length < 30){
                 binding.textinputlayoutLastname.error = null }
         }
 
-            // Mothers Village Error:
+        // Mothers Village Error:
         binding.textinputeditMothersvillage.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 50) { binding.textinputlayoutMothervillage.error = "Error: Too Many Characters"
             } else if(text.length < 50){
@@ -490,7 +495,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
 
 
         // Conditional Visibility Logic
-            // Menstrual Cycle Question
+        // Menstrual Cycle Question
         val conditionalInputLayoutMenst = binding.textinputlayoutLastmenstcycleYes
         val initialInputMenst = binding.inputDropdownLastmenstcycle
         val conditionalInputMenst = binding.inputDropdownLastmenstcycleYes
@@ -498,17 +503,17 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
 
         initialInputMenst.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val initialInputText = s.toString()
-                    if (initialInputText.equals("yes", ignoreCase = true)) {
-                        conditionalInputLayoutMenst.visibility = View.VISIBLE
-                        conditionalTextMenst.visibility = View.VISIBLE
-                        conditionalInputMenst.visibility = View.VISIBLE
-                    } else{
-                        conditionalInputLayoutMenst.visibility = View.GONE
-                        conditionalTextMenst.visibility = View.GONE
-                    }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val initialInputText = s.toString()
+                if (initialInputText.equals("yes", ignoreCase = true)) {
+                    conditionalInputLayoutMenst.visibility = View.VISIBLE
+                    conditionalTextMenst.visibility = View.VISIBLE
+                    conditionalInputMenst.visibility = View.VISIBLE
+                } else{
+                    conditionalInputLayoutMenst.visibility = View.GONE
+                    conditionalTextMenst.visibility = View.GONE
                 }
+            }
             override fun afterTextChanged(s: Editable?) {}
         })
 
