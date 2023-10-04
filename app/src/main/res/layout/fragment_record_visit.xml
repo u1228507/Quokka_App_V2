@@ -11,21 +11,28 @@
         android:id="@+id/btnPostB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post Birth Visit"
+        android:text="Post-Mother Info"
         app:layout_constraintEnd_toStartOf="@+id/btnPreB"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnPreB" />
+
+    <Button
+        android:id="@+id/btnPostBK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post-Child Info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnPostB" />
 
     <Button
         android:id="@+id/btnPreB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pre Birth Visit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Pre Visit"
+        app:layout_constraintEnd_toStartOf="@+id/btnPostB"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnPostB"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
         android:id="@+id/flFragment"
@@ -35,7 +42,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPostB" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPostB">
+
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

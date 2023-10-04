@@ -28,6 +28,7 @@
         <!-- Activity: Record Visit Page -->
         <activity
             android:name=".ui.apt_view.fragment_record_visit"
+            android:theme="@style/Theme.Quokka_App"
             android:label="Fragment Record Visit">
         </activity>
 

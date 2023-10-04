@@ -25,7 +25,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:text="@string/newpatient_inputheader_unknownquestion"
+                    android:text="This is the section to record information regarding a mother after giving birth, to maintain a more robust health record and promote better healthcare."
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/darkred"/>

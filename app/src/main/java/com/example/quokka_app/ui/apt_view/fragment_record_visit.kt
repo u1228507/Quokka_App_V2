@@ -22,9 +22,10 @@ class fragment_record_visit : AppCompatActivity() {
 
         val postVisit = post_visit()
         val preVisit = pre_visit()
+        val postVisitKid = post_visit_kid()
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, postVisit)
+            replace(R.id.flFragment, preVisit)
             commit()
         }
 
@@ -39,6 +40,14 @@ class fragment_record_visit : AppCompatActivity() {
         binding.btnPreB.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, preVisit)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+        binding.btnPostBK.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, postVisitKid)
                 addToBackStack(null)
                 commit()
             }
