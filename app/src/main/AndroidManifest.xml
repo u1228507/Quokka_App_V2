@@ -25,11 +25,10 @@
             android:theme="@style/Theme.Quokka_App.NoActionBar">
         </activity>
 
-
+        <!-- Activity: Record Visit Page -->
         <activity
             android:name=".ui.apt_view.fragment_record_visit"
-            android:label="Fragment Record Visit"
-            android:theme="@style/Theme.Quokka_App.NoActionBar">
+            android:label="Fragment Record Visit">
         </activity>
 
 
