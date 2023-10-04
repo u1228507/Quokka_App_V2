@@ -19,7 +19,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/inputheaders_UnkownQuestionsBlank"
+                    android:id="@+id/inputheaders_visittype_postmother"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -28,7 +28,7 @@
                     android:text="This is the section to record information regarding a mother after giving birth, to maintain a more robust health record and promote better healthcare."
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@color/darkred"/>
+                    android:textColor="@color/purple_500"/>
 
                 <!-- Header: Mothers Personal Information -->
                 <TextView
@@ -41,8 +41,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Input: First Name -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- First Name -->
+                <TextView
                     android:id="@+id/textinputlayout_firstname"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -50,27 +50,11 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="32dp"
-                    android:hint="@string/newpatient_input_firstname"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:helperText="Required*"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/darkred"
-                    app:startIconDrawable="@drawable/baseline_person_24">
+                    android:text="@string/patientprofiles_firstname"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_firstname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLength="31"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Input: Middle Name -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- Middle Name -->
+                <TextView
                     android:id="@+id/textinputlayout_middlename"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -79,24 +63,11 @@
                     android:layout_marginTop="-20dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="0dp"
-                    android:hint="@string/newpatient_input_middlename"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:startIconDrawable="@drawable/baseline_person_24">
+                    android:text="@string/patientprofiles_othername"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_middlename"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLength="31"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Input: Last Name -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- Last Name -->
+                <TextView
                     android:id="@+id/textinputlayout_lastname"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -105,27 +76,11 @@
                     android:layout_marginTop="-20dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="0dp"
-                    android:hint="@string/newpatient_input_lastname"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:helperText="Required*"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/darkred"
-                    app:startIconDrawable="@drawable/baseline_person_24">
+                    android:text="@string/patientprofiles_lastname"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_lastname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLength="31"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Input: Date of Birth (Still Need To Work On How User Inputs This) -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- Date of Birth (Still Need To Work On How User Inputs This) -->
+                <TextView
                     android:id="@+id/textinputlayout_dob"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -134,26 +89,11 @@
                     android:layout_marginTop="-20dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="0dp"
-                    android:hint="@string/newpatient_input_dob"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:helperText="Required*"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/darkred">
+                    android:text="@string/patientprofiles_dob"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_dob"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:maxLength="10"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Input: Mothers Village -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- Mothers Village -->
+                <TextView
                     android:id="@+id/textinputlayout_mothervillage"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -161,26 +101,11 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="32dp"
-                    android:hint="@string/newpatient_input_mothersvillage"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:helperText="Required*"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/darkred">
+                    android:text="@string/patientprofiles_mothersvillage"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_mothersvillage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="51"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Input: Mother's Contact Number -->
-                <com.google.android.material.textfield.TextInputLayout
+                <TextView
                     android:id="@+id/textinputlayout_motherscontactnumber"
                     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
@@ -188,23 +113,8 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="32dp"
-                    android:hint="@string/newpatient_input_motherscontactnumber"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:errorIconDrawable="@drawable/baseline_error_24"
-                    app:helperText="Required*"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/darkred">
+                    android:text="@string/patientprofiles_motherscontactnumber"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinputedit_motherscontactnumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="11"
-                        android:textColor="@color/black"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Patient Profile Picture -->
                 <TextView
@@ -222,7 +132,7 @@
                     android:src="@drawable/baseline_person_24_purple"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/newpatient_input_patientprofileimage">
+                    android:contentDescription="@string/patientprofiles_image">
                 </ImageView>
 
                 <Button

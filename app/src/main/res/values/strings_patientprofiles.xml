@@ -3,11 +3,13 @@
     //
     <string name="patientprofiles_lastname">Last Name: </string>
     <string name="patientprofiles_firstname">First Name: </string>
+    <string name="patientprofiles_othername">First Name: </string>
     <string name="patientprofiles_dob">Date of Birth: </string>
     <string name="patientprofiles_testing">Testing</string>
     <string name="patientprofiles_image">Patient Profile Image</string>
     <string name="patientprofiles_unknown">Unknown</string>
-
+    <string name="patientprofiles_mothersvillage">Unknown</string>
+    <string name="patientprofiles_motherscontactnumber">Unknown</string>
 
 
 </resources>
