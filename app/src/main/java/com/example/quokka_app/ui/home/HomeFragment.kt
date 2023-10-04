@@ -35,10 +35,8 @@ class HomeFragment : Fragment() {
 
         binding.btnRecordVisit.setOnClickListener {
             val intent = Intent(requireActivity(), fragment_record_visit::class.java)
-
             // Start the record_visit activity
             startActivity(intent)
-
         }
 
         return root
