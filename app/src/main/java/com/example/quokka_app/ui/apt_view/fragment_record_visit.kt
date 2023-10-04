@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentRecordVisitBinding
 
+
 class fragment_record_visit : AppCompatActivity() {
 
     private lateinit var binding: FragmentRecordVisitBinding

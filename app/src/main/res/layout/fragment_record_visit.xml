@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.apt_view.fragment_record_visit">
 
+
     <Button
         android:id="@+id/btnPostB"
         android:layout_width="wrap_content"

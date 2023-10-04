@@ -1,6 +1,7 @@
 package com.example.quokka_app
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,6 +12,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quokka_app.databinding.ActivityMainBinding
+import com.example.quokka_app.ui.apt_view.post_visit
+import com.example.quokka_app.ui.apt_view.pre_visit
+import com.example.quokka_app.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
+
 
         // Navigation Drawer Code:
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
+
     // Navigation Drawer Code Continued:
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
