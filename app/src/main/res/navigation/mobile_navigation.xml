@@ -35,4 +35,17 @@
         android:label="@string/menu_userprofile"
         tools:layout="@layout/fragment_userprofile" />
 
+    <fragment
+        android:id="@+id/nav_firstvisit"
+        android:name="com.example.quokka_app.ui.firstvisit.FirstVisitFragment"
+        android:label="@string/menu_firstvisit"
+        tools:layout="@layout/fragment_first_visit"/>
+
+    <fragment
+        android:id="@+id/nav_patientprofileshome"
+        android:name="com.example.quokka_app.ui.patientprofilehome.PatientProfilesHomeFragment"
+        android:label="@string/menu_patientprofileshome"
+        tools:layout="@layout/fragment_patient_profiles_home">
+    </fragment>
+
 </navigation>

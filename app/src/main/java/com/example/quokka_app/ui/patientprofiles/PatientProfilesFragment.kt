@@ -1,13 +1,16 @@
 package com.example.quokka_app.ui.patientprofiles
 
+import PatientProfilesAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentPatientprofilesBinding
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,16 +35,25 @@ class PatientProfilesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
 
-        patientProfilesDataClassArrayList = arrayListOf()
-        patientProfilesAdapter = PatientProfilesAdapter(patientProfilesDataClassArrayList)
-        recyclerView.adapter = patientProfilesAdapter
+        patientProfilesDataClassArrayList = ArrayList()
+        patientProfilesAdapter = PatientProfilesAdapter(patientProfilesDataClassArrayList) { item ->
+            val bundle = Bundle()
+            bundle.putString("patientid",item.patientid)
+            bundle.putString("firstname",item.firstname)
+            bundle.putString("lastname",item.lastname)
+            bundle.putString("dateofbirth",item.dateofbirth)
+            bundle.putString("imageUrl", item.imageUrl)
 
-        EventChangeListener()
+            val navController = findNavController()
+            navController.navigate(R.id.nav_patientprofileshome, bundle)}
+
+        recyclerView.adapter = patientProfilesAdapter
+        eventChangeListener()
 
         return view
     }
 
-    private fun EventChangeListener() {
+    private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("Patient Profiles")
             .addSnapshotListener { value, error ->
@@ -64,7 +76,6 @@ class PatientProfilesFragment : Fragment() {
                 patientProfilesAdapter.notifyItemRangeInserted(startInsertPosition, sortedList.size)
             }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,6 +1,7 @@
 package com.example.quokka_app.ui.newpatientprofile
 
 data class NewPatienProfileDataClass(
+    var patientId: String? = null,
     val firstname: String,
     val middlename: String,
     val lastname: String,
