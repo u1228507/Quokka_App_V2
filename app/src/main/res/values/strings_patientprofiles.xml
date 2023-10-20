@@ -7,5 +7,6 @@
     <string name="patientprofiles_testing">Testing</string>
     <string name="patientprofiles_image">Patient Profile Image</string>
     <string name="patientprofiles_unknown">Unknown</string>
+    <string name="patientprofiles_buttontext_viewprofile">View Profile</string>
 
 </resources>
