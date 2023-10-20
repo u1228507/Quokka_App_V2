@@ -2,4 +2,20 @@
 <resources>
     // Headers
     <string name="firstvisit_header_firstvisit">First Visit</string>
+    <string name="firstvisit_questionheader_bloodpressure">Blood Pressure (mmHg)</string>
+
+    // Inputs
+    <string name="firstvisit_input_dateofvisit">Date of Visit</string>
+    <string name="firstvisit_input_height">Height (cm)</string>
+    <string name="firstvisit_input_weight">Weight (kg)</string>
+    <string name="firstvisit_input_temperature">Temperature (°C)</string>
+    <string name="firstvisit_input_systolic">Systolic</string>
+    <string name="firstvisit_input_diastolic">Diastolic</string>
+
+    // Random
+    <string name="firstvisit_backslash">/</string>
+
+    // Button
+    <string name="firstvisit_button_savefirstvisit">Save First Visit</string>
+
 </resources>

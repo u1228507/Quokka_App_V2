@@ -4,44 +4,54 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
+import com.example.quokka_app.databinding.FragmentPatientProfilesHomeBinding
 import com.squareup.picasso.Picasso
 
+class PatientProfilesHomeFragment : Fragment() {
+    private var binding: FragmentPatientProfilesHomeBinding? = null
 
-class PatientProfilesHomeFragment : Fragment(R.layout.fragment_patient_profiles_home) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_patient_profiles_home, container, false)
+    ): View? {
+        binding = FragmentPatientProfilesHomeBinding.inflate(inflater, container, false)
+
         val firstName = arguments?.getString("firstname")
         val lastName = arguments?.getString("lastname")
         val imageUrl = arguments?.getString("imageUrl")
-        val dateofbirth = arguments?.getString("dateofbirth")
+        val dateOfBirth = arguments?.getString("dateofbirth")
 
-        // Find the TextView and ImageView by their IDs
-        val textViewFirstName = view.findViewById<TextView>(R.id.pph_firstname)
-        val textViewLastName = view.findViewById<TextView>(R.id.pph_lastname)
-        val textViewDateOfBirth = view.findViewById<TextView>(R.id.pph_dateofbirth)
-        val imageViewPatient = view.findViewById<ImageView>(R.id.PatientProfilePicture)
+        val textViewFirstName = binding?.pphFirstname
+        val textViewLastName = binding?.pphLastname
+        val textViewDateOfBirth = binding?.pphDateofbirth
+        val imageViewPatient = binding?.PatientProfilePicture
 
-        // Display the patientName in the TextView
         if (firstName != null) {
-            textViewFirstName.text = "First Name: $firstName"
+            val firstNameLabel = getString(R.string.patientprofileshome_label_firstname, firstName)
+            textViewFirstName?.text = firstNameLabel
         }
         if (lastName != null) {
-            textViewLastName.text = "Last Name: $lastName"
+            val lastNameLabel = getString(R.string.patientprofileshome_label_lastname, lastName)
+            textViewLastName?.text = lastNameLabel
         }
-        if (dateofbirth != null) {
-            textViewDateOfBirth.text = "Date of Birth: $dateofbirth"
-        }
-        if (imageUrl != null) {
-            Picasso.get().load(imageUrl).into(imageViewPatient)
+        if (dateOfBirth != null) {
+            val dateOfBirthLabel = getString(R.string.patientprofileshome_label_dateofbirth, dateOfBirth)
+            textViewDateOfBirth?.text = dateOfBirthLabel
         }
 
-        return view
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl).into(imageViewPatient)
+        } else {
+            imageViewPatient?.setImageResource(R.drawable.baseline_person_24_purple)
+        }
+        return binding?.root
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

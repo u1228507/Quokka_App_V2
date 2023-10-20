@@ -24,15 +24,15 @@
             <!-- Image View for the patient's image -->
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="125dp"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_person_24_purple"
                 android:contentDescription="@string/patientprofiles_image"
                 android:layout_margin="16dp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
@@ -97,8 +97,7 @@
                 android:id="@+id/button_patientprofilehome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="View Profile"
-                android:layout_below="@id/cardView"
+                android:text="@string/patientprofiles_buttontext_viewprofile"
                 android:layout_marginTop="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"

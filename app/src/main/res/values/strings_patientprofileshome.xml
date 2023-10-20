@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="patientprofileshome_patientimage">Patient Profile Image</string>
+    <string name="patientprofileshome_label_firstname">First Name: %1$s</string>
+    <string name="patientprofileshome_label_lastname">Last Name: %1$s</string>
+    <string name="patientprofileshome_label_dateofbirth">Date of Birth: %1$s</string>
 </resources>

@@ -28,7 +28,7 @@
                 android:text="@string/newpatient_inputheader_unknownquestion"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/darkred"/>
+                android:textColor="@color/darkpurple"/>
 
             <!-- Header: Mothers Personal Information -->
             <TextView
@@ -200,7 +200,7 @@
                     android:id="@+id/textinputedit_motherscontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
@@ -365,7 +365,7 @@
                     android:id="@+id/textinputedit_fatherscontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
@@ -461,7 +461,7 @@
                     android:id="@+id/textinputedit_fchwcontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
@@ -616,6 +616,8 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:hint="@string/newpatient_hint_motherbirthdefect"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
                 android:visibility="visible"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
@@ -1153,6 +1155,8 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:hint="@string/newpatienti_hint_drugtype"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
                 android:visibility="visible"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"

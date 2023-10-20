@@ -1,6 +1,5 @@
 package com.example.quokka_app.ui.patientprofiles
 
-import PatientProfilesAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentPatientprofilesBinding
+import com.example.quokka_app.ui.patientprofilehome.PatientProfilesHomeFragment
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -25,7 +25,8 @@ class PatientProfilesFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPatientprofilesBinding.inflate(inflater, container, false)
@@ -35,21 +36,11 @@ class PatientProfilesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
 
-        patientProfilesDataClassArrayList = ArrayList()
-        patientProfilesAdapter = PatientProfilesAdapter(patientProfilesDataClassArrayList) { item ->
-            val bundle = Bundle()
-            bundle.putString("patientid",item.patientid)
-            bundle.putString("firstname",item.firstname)
-            bundle.putString("lastname",item.lastname)
-            bundle.putString("dateofbirth",item.dateofbirth)
-            bundle.putString("imageUrl", item.imageUrl)
-
-            val navController = findNavController()
-            navController.navigate(R.id.nav_patientprofileshome, bundle)}
-
+        patientProfilesDataClassArrayList = arrayListOf()
+        patientProfilesAdapter = PatientProfilesAdapter(patientProfilesDataClassArrayList, ItemClickListener())
         recyclerView.adapter = patientProfilesAdapter
-        eventChangeListener()
 
+        eventChangeListener()
         return view
     }
 
@@ -58,28 +49,79 @@ class PatientProfilesFragment : Fragment() {
         db.collection("Patient Profiles")
             .addSnapshotListener { value, error ->
                 if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
                     return@addSnapshotListener
                 }
-                val sortedList = mutableListOf<PatientProfilesDataClass>()
-                for (dc: DocumentChange in value?.documentChanges!!) {
+
+                val totalDocs = value!!.documentChanges.size
+                var processedDocs = 0
+                val sortedList = mutableListOf<PatientProfilesDataClass>() // ...
+
+                for (dc: DocumentChange in value.documentChanges) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        // Fetch the image URL from Firestore and set it in PatientProfilesDataClass
-                        val patientProfile = dc.document.toObject(PatientProfilesDataClass::class.java)
-                        patientProfile.imageUrl = dc.document.getString("imageUrl")
-                        sortedList.add(patientProfile)
+                        val patientId = dc.document.id
+                        Log.d("PatientId", "Patient ID: $patientId") // Log the patient ID
+                        val generalInfoRef = db.collection("Patient Profiles")
+                            .document(patientId)
+                            .collection("Patient Profile Information")
+                            .document("General Info")
+
+                        generalInfoRef.get().addOnSuccessListener { generalInfoSnapshot ->
+                            val firstname = generalInfoSnapshot.getString("firstname")
+                            val lastname = generalInfoSnapshot.getString("lastname")
+                            val dateofbirth = generalInfoSnapshot.getString("dateofbirth")
+                            val imageUrl = generalInfoSnapshot.getString("imageUrl")
+
+                            val patientProfile = PatientProfilesDataClass(
+                                firstname ?: "",
+                                lastname ?: "",
+                                dateofbirth ?: "",
+                                imageUrl ?: "",
+                                patientId
+                            )
+                            sortedList.add(patientProfile)
+
+                            // Check if all documents have been processed
+                            if (++processedDocs == totalDocs) {
+                                sortedList.sortBy { it.lastname }
+                                patientProfilesDataClassArrayList.clear()
+                                patientProfilesDataClassArrayList.addAll(sortedList)
+                                patientProfilesAdapter.notifyDataSetChanged()
+                            }
+                        }
+                            .addOnFailureListener { e ->
+                                Log.e("Firestore Error", e.message.toString())
+
+                                // Ensure the counter is incremented even if there's an error
+                                if (++processedDocs == totalDocs) {
+                                    sortedList.sortBy { it.lastname }
+                                    patientProfilesDataClassArrayList.clear()
+                                    patientProfilesDataClassArrayList.addAll(sortedList)
+                                    patientProfilesAdapter.notifyDataSetChanged()
+                                }
+                            }
                     }
                 }
-                sortedList.sortBy { it.lastname }
-                val startInsertPosition = patientProfilesDataClassArrayList.size
-                patientProfilesDataClassArrayList.addAll(sortedList)
-                patientProfilesAdapter.notifyItemRangeInserted(startInsertPosition, sortedList.size)
             }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-}
 
+    private inner class ItemClickListener : PatientProfilesAdapter.OnItemClickListener {
+        override fun onItemClick(patientProfile: PatientProfilesDataClass) {
+            val bundle = Bundle()
+            bundle.putString("firstname", patientProfile.firstname)
+            bundle.putString("lastname", patientProfile.lastname)
+            bundle.putString("dateofbirth", patientProfile.dateofbirth)
+            bundle.putString("imageUrl", patientProfile.imageUrl)
+
+            val patientProfilesHomeFragment = PatientProfilesHomeFragment()
+            patientProfilesHomeFragment.arguments = bundle
+
+            findNavController().navigate(R.id.action_patientProfilesFragment_to_patientProfilesHomeFragment, bundle)
+        }
+    }
+}

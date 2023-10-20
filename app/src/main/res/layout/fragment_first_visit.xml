@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,16 +21,202 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/firstvisit_header_firstvisit"
+                android:id="@+id/inputheaders_UnkownQuestionsBlank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/firstvisit_header_firstvisit"
-                android:textSize="50sp"
+                android:text="@string/newpatient_inputheader_unknownquestion"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/purple_700"/>
+                android:textColor="@color/darkpurple"/>
+
+            <!-- Input: Date of Visit -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_dateofvisit"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_dateofvisit"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_dateofvisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:maxLength="8"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Height -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_height"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_height"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Weight -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_weight"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_weight"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Temperature -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_temperature"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="-15dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_temperature"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Blood Pressure -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firstvisit_questionheader_bloodpressure"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="0dp" />
+                <!-- Input: Systolic Pressure -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutinput_firstvisit_systolic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:hint="@string/firstvisit_input_systolic"
+                        android:paddingStart="32dp"
+                        tools:ignore="RtlSymmetry">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textedit_firstvisit_systolic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLength="3"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- Text: Backslash -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firstvisit_backslash"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp" />
+                    <!-- Input: Diastolic Pressure -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutinput_firstvisit_diastolic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:paddingEnd="32dp"
+                        android:paddingStart="0dp"
+                        android:hint="@string/firstvisit_input_diastolic">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textedit_firstvisit_diastolic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLength="3"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Button: Create New Patient Profile -->
+            <Button
+                android:id="@+id/firstvisit_button_savefirstvisit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/firstvisit_button_savefirstvisit" />
 
         </LinearLayout>
     </ScrollView>

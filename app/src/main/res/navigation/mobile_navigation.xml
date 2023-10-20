@@ -36,16 +36,27 @@
         tools:layout="@layout/fragment_userprofile" />
 
     <fragment
-        android:id="@+id/nav_firstvisit"
-        android:name="com.example.quokka_app.ui.firstvisit.FirstVisitFragment"
-        android:label="@string/menu_firstvisit"
-        tools:layout="@layout/fragment_first_visit"/>
-
-    <fragment
         android:id="@+id/nav_patientprofileshome"
         android:name="com.example.quokka_app.ui.patientprofilehome.PatientProfilesHomeFragment"
         android:label="@string/menu_patientprofileshome"
         tools:layout="@layout/fragment_patient_profiles_home">
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_firstvisit"
+        android:name="com.example.quokka_app.ui.firstvisit.FirstVisitFragment"
+        android:label="@string/menu_firstvisit"
+        tools:layout="@layout/fragment_first_visit">
+    </fragment>
+
+    <action
+        android:id="@+id/action_newPatientProfileFragment_to_firstVisitFragment"
+        app:destination="@id/nav_firstvisit"
+        app:popUpTo="@id/mobile_navigation"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_patientProfilesFragment_to_patientProfilesHomeFragment"
+        app:destination="@id/nav_patientprofileshome" />
 
 </navigation>
