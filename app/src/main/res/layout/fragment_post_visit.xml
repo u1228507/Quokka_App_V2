@@ -208,6 +208,281 @@
                         android:visibility="visible" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/inputheaders_visittype_postkid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="This is the section to record information regarding a child, post-birth"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/purple_500"/>
+
+
+                <TextView
+                    android:id="@+id/inputheaders_motherpersonalinfo_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Child Postpartum Information"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Height  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_Height"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Height (e.x. 50)cm"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_Height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:maxLength="3"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Weight  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_Weight"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Weight (e.x. 3.50)kg"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_Weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:maxLength="4"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Head Circumference  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_HeadCir"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Head Circumference (e.x. 34)cm"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_HeadCir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Temp  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_Temp"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Temp (e.x. 37.00)C"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_Temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:maxLength="5"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Blood Pressure  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_BP"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Blood Pressure (e.x. 120/100)"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_BP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Heart Rate  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_HR"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Heart Rate (e.x. 75)bpm"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_HR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Breathing Rate  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_BR"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Breathing Rate (e.x. 20)bpm"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_BR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Feeding  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_feeding"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Times fed per day (e.x. 5)"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_feeding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Other Questions/Notes  -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_postP_Child_Other"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:hint="Enter any other Questions or Notes"
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_postP_Child_Other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLength="100"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
 
             </LinearLayout>

@@ -9,29 +9,31 @@
 
     <Button
         android:id="@+id/btnPostB"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
-        android:text="Post-Mother Info"
-        app:layout_constraintEnd_toStartOf="@+id/btnPreB"
+        android:text="Postpartum Visit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnPreB" />
+        app:layout_constraintStart_toEndOf="@+id/btnPreB"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/btnPostBK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Post-Child Info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Removed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnPostB" />
 
     <Button
         android:id="@+id/btnPreB"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
-        android:text="Pre Visit"
+        android:text="Prenatal Visit"
         app:layout_constraintEnd_toStartOf="@+id/btnPostB"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
