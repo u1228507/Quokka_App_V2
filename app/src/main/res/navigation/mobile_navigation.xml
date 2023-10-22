@@ -53,10 +53,15 @@
         android:id="@+id/action_newPatientProfileFragment_to_firstVisitFragment"
         app:destination="@id/nav_firstvisit"
         app:popUpTo="@id/mobile_navigation"
-        app:popUpToInclusive="true"/>
+        app:popUpToInclusive="false"/>
 
     <action
         android:id="@+id/action_patientProfilesFragment_to_patientProfilesHomeFragment"
         app:destination="@id/nav_patientprofileshome" />
+
+    <action
+        android:id="@+id/action_firstvisitfragment_to_patientprofilesfragment"
+        app:destination="@id/nav_patientprofiles"
+        />
 
 </navigation>

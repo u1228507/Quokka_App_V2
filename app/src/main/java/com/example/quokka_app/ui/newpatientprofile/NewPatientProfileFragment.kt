@@ -27,6 +27,9 @@ import com.google.firebase.firestore.SetOptions
 import java.util.Calendar
 import java.util.Locale
 import java.util.UUID
+import com.google.i18n.phonenumbers.PhoneNumberUtil
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber
+import com.google.i18n.phonenumbers.NumberParseException
 
 class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles) {
     private var _binding: FragmentNewpatientprofilesBinding? = null
@@ -57,10 +60,36 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 }
             }
         }
-
         // Select image when the button is clicked
         binding.buttonPatientprofileimage.setOnClickListener {
             selectImage()
+        }
+
+     // Phone Number Validation
+        // Default regions for validation
+        val defaultRegionIndia = "IN"
+        val defaultRegionUS = "US"
+
+        binding.textinputeditMotherscontactnumber.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val mothersPhoneNumber = binding.textinputeditMotherscontactnumber.text.toString()
+                if (!isPhoneNumberValid(mothersPhoneNumber, defaultRegionIndia) && !isPhoneNumberValid(mothersPhoneNumber, defaultRegionUS)) {
+                    binding.textinputeditMotherscontactnumber.error = "Invalid Phone Number"
+                } else {
+                    binding.textinputeditMotherscontactnumber.error = null
+                }
+            }
+        }
+
+        binding.textinputeditFchwcontactnumber.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val fchwPhoneNumber = binding.textinputeditFchwcontactnumber.text.toString()
+                if (!isPhoneNumberValid(fchwPhoneNumber, defaultRegionIndia) && !isPhoneNumberValid(fchwPhoneNumber, defaultRegionUS)) {
+                    binding.textinputeditFchwcontactnumber.error = "Invalid Phone Number"
+                } else {
+                    binding.textinputeditFchwcontactnumber.error = null
+                }
+            }
         }
 
         // Save Button Listener
@@ -78,33 +107,68 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             val fchwFirstName = binding.textinputeditFchwfirstname.text.toString()
             val fchwLastName = binding.textinputeditFchwlastname.text.toString()
             val fchwPhoneNumber = binding.textinputeditFchwcontactnumber.text.toString()
+            val fathersPhoneNumber = binding.textinputeditFatherscontactnumber.text.toString()
+
+            // Validate phone numbers
+            var isValid = true
+            val isMothersPhoneNumberValid = isPhoneNumberValid(mothersPhoneNumber, defaultRegionIndia) || isPhoneNumberValid(mothersPhoneNumber, defaultRegionUS)
+            val isFchwPhoneNumberValid = isPhoneNumberValid(fchwPhoneNumber, defaultRegionIndia) || isPhoneNumberValid(fchwPhoneNumber, defaultRegionUS)
+            val isFathersPhoneNumberValid = isPhoneNumberValid(fathersPhoneNumber, defaultRegionIndia) || isPhoneNumberValid(fathersPhoneNumber, defaultRegionUS)
+
+            if (!isMothersPhoneNumberValid) {
+                binding.textinputeditMotherscontactnumber.error = "Invalid Phone Number"
+                isValid = false
+            }
+            if (!isFchwPhoneNumberValid) {
+                binding.textinputeditFchwcontactnumber.error = "Invalid Phone Number"
+                isValid = false
+            }
+            if (fathersPhoneNumber.isNotEmpty()) {
+                if (!isFathersPhoneNumberValid) {
+                    binding.textinputeditFatherscontactnumber.error = "Invalid phone number format"
+                    isValid = false
+                } else {
+                    binding.textinputeditFatherscontactnumber.error = null
+                }
+            }
 
             if (firstName.isEmpty()) {
                 binding.textinputeditFirstname.error = "First Name is required"
+                Toast.makeText(requireContext(), "First Name is required", Toast.LENGTH_SHORT).show()
             }
             if (lastName.isEmpty()) {
                 binding.textinputeditLastname.error = "Last Name is required"
+                Toast.makeText(requireContext(), "Last Name is required", Toast.LENGTH_SHORT).show()
             }
             if (dateOfBirth.isEmpty()) {
                 binding.textinputeditDob.error = "Date of Birth is required"
+                Toast.makeText(requireContext(), "Date of Birth is required", Toast.LENGTH_SHORT).show()
             }
             if (mothersVillage.isEmpty()) {
                 binding.textinputeditMothersvillage.error = "Mother's Village is required"
+                Toast.makeText(requireContext(), "Mother's Village is required", Toast.LENGTH_SHORT).show()
             }
             if (mothersPhoneNumber.isEmpty()) {
-                binding.textinputeditMotherscontactnumber.error = "Mother's Contact Number is required"
+                binding.textinputeditMotherscontactnumber.error = "Mother's Phone Number is required"
+                Toast.makeText(requireContext(), "Mother's Phone Number is required", Toast.LENGTH_SHORT).show()
+
             }
             if (fchwFirstName.isEmpty()) {
                 binding.textinputeditFchwfirstname.error = "FCHW First Name is required"
+                Toast.makeText(requireContext(), "FCHW First Name is required", Toast.LENGTH_SHORT).show()
+
             }
             if (fchwLastName.isEmpty()) {
                 binding.textinputeditFchwlastname.error = "FCHW Last Name is required"
+                Toast.makeText(requireContext(), "FCHW Last Name is required", Toast.LENGTH_SHORT).show()
+
             }
             if (fchwPhoneNumber.isEmpty()) {
-                binding.textinputeditFchwcontactnumber.error = "FCHW Contact Number is required"
+                binding.textinputeditFchwcontactnumber.error = "FCHW Phone Number is required"
+                Toast.makeText(requireContext(), "FCHW Phone Number is required", Toast.LENGTH_SHORT).show()
             }
 
-            if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty() && mothersVillage.isNotEmpty() && mothersPhoneNumber.isNotEmpty() && fchwFirstName.isNotEmpty() && fchwLastName.isNotEmpty() && fchwPhoneNumber.isNotEmpty()) {
+            if (firstName.isNotEmpty() && lastName.isNotEmpty() && dateOfBirth.isNotEmpty() && mothersVillage.isNotEmpty() && mothersPhoneNumber.isNotEmpty() && fchwFirstName.isNotEmpty() && fchwLastName.isNotEmpty() && fchwPhoneNumber.isNotEmpty() && isValid) {
                 val patientId = UUID.randomUUID().toString()
                 val patientProfilesCollection = firestore.collection("Patient Profiles")
                 val patientDocument = patientProfilesCollection.document(patientId)
@@ -163,6 +227,8 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                     drugtypes = binding.inputDropdownDrugsYes.text.toString(),
                 )
                 val profilesCollection = firestore.collection("Patient Profiles")
+
+
 
                 if (selectedImageURI != null) {
                     val timeStamp = System.currentTimeMillis().toString()
@@ -227,6 +293,10 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
 
                                                 val bundle = Bundle()
                                                 bundle.putString("patientId", patientId)
+                                                bundle.putString("firstname", firstName)
+                                                bundle.putString("lastname", lastName)
+                                                bundle.putString("imageUrl", imageUrl.toString())
+                                                bundle.putString("dateofbirth", dateOfBirth)
                                                 findNavController().navigate(R.id.action_newPatientProfileFragment_to_firstVisitFragment, bundle)
 
                                                 Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
@@ -287,6 +357,9 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
 
                         val bundle = Bundle()
                         bundle.putString("patientId", patientId)
+                        bundle.putString("firstname", firstName)
+                        bundle.putString("lastname", lastName)
+                        bundle.putString("dateofbirth", dateOfBirth)
                         findNavController().navigate(R.id.action_newPatientProfileFragment_to_firstVisitFragment, bundle)
 
                         Toast.makeText(requireContext(), "Patient profile saved successfully", Toast.LENGTH_SHORT).show()
@@ -325,13 +398,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 binding.textinputlayoutMothervillage.error = null }
         }
 
-        // Mothers Phone Number:
-        binding.textinputeditMotherscontactnumber.doOnTextChanged { text, _, _, _ ->
-            if(text!!.length > 10) { binding.textinputlayoutMotherscontactnumber.error = "Error: Too Many Characters"
-            } else if(text.length < 10){
-                binding.textinputlayoutMotherscontactnumber.error = null }
-        }
-
         // Fathers First Name:
         binding.textinputeditFathersfirstname.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 30) { binding.textinputlayoutFatherfirstname.error = "Error: Too Many Characters"
@@ -360,13 +426,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 binding.textinputlayoutFathervillage.error = null }
         }
 
-        // Fathers Contact Number:
-        binding.textinputeditFatherscontactnumber.doOnTextChanged { text, _, _, _ ->
-            if(text!!.length > 10) { binding.textinputlayoutFatherscontactnumber.error = "Error: Too Many Characters"
-            } else if(text.length < 10){
-                binding.textinputlayoutFatherscontactnumber.error = null }
-        }
-
         // FCHW First Name
         binding.textinputeditFchwfirstname.doOnTextChanged { text, _, _, _ ->
             if(text!!.length > 30) { binding.textinputlayoutFchwfirstname.error = "Error: Too Many Characters"
@@ -379,13 +438,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
             if(text!!.length > 30) { binding.textinputlayoutFchwlastname.error = "Error: Too Many Characters"
             } else if(text.length < 30){
                 binding.textinputlayoutFchwlastname.error = null }
-        }
-
-        // FCHW Contact Number
-        binding.textinputeditFchwcontactnumber.doOnTextChanged { text, _, _, _ ->
-            if(text!!.length > 10) { binding.textinputlayoutFchwcontactnumber.error = "Error: Too Many Characters"
-            } else if(text.length < 10){
-                binding.textinputlayoutFchwcontactnumber.error = null }
         }
 
         // Mother Birth Defect
@@ -779,6 +831,15 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
-
+    // Phone Validation Function
+   private fun isPhoneNumberValid(phoneNumber: String, defaultRegion: String): Boolean {
+        val phoneNumberUtil = PhoneNumberUtil.getInstance()
+        return try {
+            val parsedPhoneNumber: PhoneNumber = phoneNumberUtil.parse(phoneNumber, defaultRegion)
+            phoneNumberUtil.isValidNumber(parsedPhoneNumber)
+        } catch (e: NumberParseException) {
+            false
+        }
+    }
     }
 

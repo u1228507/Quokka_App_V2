@@ -1,16 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Headers
-    <string name="firstvisit_header_firstvisit">First Visit</string>
+    <string name="firstvisit_header_firstvisit">First Visit:</string>
+    <string name="firstivisit_header_labwork">Lab Work</string>
+    <string name="firstvisit_header_infectdiseasescreening">Infectious Diseases Screening</string>
+    <string name="firstvisit_header_childsvitals">Child\'s Vitals</string>
     <string name="firstvisit_questionheader_bloodpressure">Blood Pressure (mmHg)</string>
 
     // Inputs
-    <string name="firstvisit_input_dateofvisit">Date of Visit</string>
     <string name="firstvisit_input_height">Height (cm)</string>
     <string name="firstvisit_input_weight">Weight (kg)</string>
     <string name="firstvisit_input_temperature">Temperature (°C)</string>
     <string name="firstvisit_input_systolic">Systolic</string>
     <string name="firstvisit_input_diastolic">Diastolic</string>
+    <string name="firstvisit_input_heartrate">Heart Rate (bpm)</string>
+    <string name="firstvisit_input_fetalheartrate">Fetal Heart Rate (bpm)</string>
+    <string name="firstvisit_input_duedate">Due Date (DD-MM-YYYY)</string>
+
+    // Drop Down Menu Questions
+    <string name="firstvisit_dropdownquestion_urinalysis">Was a urinalysis conducted during the visit? </string>
+    <string name="firstvisit_dropdownquestions_hemoglobin">Was a hemoglobin test conducted during the visit?</string>
+    <string name="firstvisit_dropdownquestions_antibodies">Was blood work collected to test for antibodies during the visit?</string>
+    <string name="firstvisit_dropdownquestions_fetalposition">What fetal position was the child in at the visit?</string>
+    <string name="firstvisit_dropdownquestions_fetalmove">Was fetal movement detected at the visit?</string>
+
+    // Conditional Drop Down Menu Questions
+    <string name="firstvisit_conditional_question_bloodtype">Does the patient know their blood type?</string>
+    <string name="firstvisit_conditional_question_hepb">Does the patient have Hepatitis B?</string>
+    <string name="firstvisit_conditional_question_hiv">Does the patient have human immunodeficiency virus (HIV)?</string>
+    <string name="firstvisit_conditional_question_syph">Does the patient have syphilis?</string>
+    <string name="firstvisit_conditional_no_bloodtype">Was blood type analysis conducted during the visit? </string>
+    <string name="firstvisit_conditional_no_hepb">Was blood work collected to test for Hepatitis B during the visit?</string>
+    <string name="firstvisit_conditional_no_hiv">Was blood work collected to test for HIV during the visit?</string>
+    <string name="firstvisit_conditional_no_syph">Was blood work collected to test for syphilis during the visit?</string>
+
+    // Strings For First Visit Drop Down Menus
+    <string-array name="firstvisit_dropdownoptions_ynu">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Unknown</item>
+    </string-array>
+
+    <string-array name="firstvisit_dropdownoptions_bloodtype">
+        <item>Unknown</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="firstvisit_dropdownoptions_fetalposition">
+        <item>Unknown</item>
+        <item>Anterior</item>
+        <item>Posterior</item>
+        <item>Complete Breech</item>
+        <item>Frank Breech</item>
+        <item>Footling Breach</item>
+        <item>Transverse Lie</item>
+    </string-array>
+
 
     // Random
     <string name="firstvisit_backslash">/</string>

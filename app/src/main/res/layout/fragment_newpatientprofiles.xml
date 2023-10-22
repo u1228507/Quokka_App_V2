@@ -124,7 +124,7 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Input: Date of Birth (Still Need To Work On How User Inputs This) -->
+            <!-- Input: Date of Birth -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_dob"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
@@ -189,7 +189,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_motherscontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24"
                 app:helperText="Required*"
@@ -201,7 +200,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -357,7 +355,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_fatherscontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24">
 

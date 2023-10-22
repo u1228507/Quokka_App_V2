@@ -32,29 +32,19 @@
                 android:textStyle="bold"
                 android:textColor="@color/darkpurple"/>
 
-            <!-- Input: Date of Visit -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutinput_firstvisit_dateofvisit"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            <!-- Header:  -->
+            <TextView
+                android:id="@+id/inputheaders_motherpersonalinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="-20dp"
-                android:layout_marginEnd="32dp"
-                android:hint="@string/firstvisit_input_dateofvisit"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textedit_firstvisit_dateofvisit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="date"
-                    android:maxLength="8"
-                    android:textColor="@color/black"
-                    tools:ignore="TextContrastCheck"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/firstvisit_header_firstvisit"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700"/>
 
             <!-- Input: Height -->
             <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:maxLength="5"
                     android:textColor="@color/black"
-                    tools:ignore="TextContrastCheck"/>
+                    tools:ignore="TextContrastCheck"
+                    android:inputType="numberDecimal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: Weight -->
@@ -99,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:maxLength="5"
                     android:textColor="@color/black"
-                    tools:ignore="TextContrastCheck"/>
+                    tools:ignore="TextContrastCheck"
+                    android:inputType="numberDecimal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: Temperature -->
@@ -123,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:maxLength="5"
                     android:textColor="@color/black"
-                    tools:ignore="TextContrastCheck"/>
+                    tools:ignore="TextContrastCheck"
+                    android:inputType="numberDecimal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input: Blood Pressure -->
@@ -156,7 +149,7 @@
                             android:id="@+id/textedit_firstvisit_systolic"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
+                            android:inputType="number"
                             android:maxLength="3"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -182,19 +175,590 @@
                             android:id="@+id/textedit_firstvisit_diastolic"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
+                            android:inputType="number"
                             android:maxLength="3"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Input: Heart Rate -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_heartrate"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_heartrate"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_heartrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="3"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Input: Due date -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_duedate"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:hint="@string/firstvisit_input_duedate"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_duedate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/firstvisit_header_labwork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/firstivisit_header_labwork"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700"/>
 
+            <!-- Input: Urinalysis  -->
+                <!-- Question Prompt: -->
+            <TextView
+                android:id="@+id/firstvisit_yesnoquestion_urinalysis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_dropdownquestion_urinalysis"
+                android:textSize="16sp" />
 
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_urinalysis"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_urinalysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Hemoglobin  -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_yesnoquestion_hemoglobin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_dropdownquestions_hemoglobin"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_hemoglobin"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_hemoglobin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Antibodies  -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_yesnoquestion_antibodies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_dropdownquestions_antibodies"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_antibodies"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_antibodies"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Blood Type -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_question_bloodwork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_question_bloodtype"
+                android:textSize="16sp" />
+
+            <!-- Blood Types Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_bloodtype"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_bloodtype"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If No -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_bloodtype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_no_bloodtype"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_conditional_bloodwork"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_conditional_bloodwork"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize"
+                    android:visibility="visible"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Header: Infectious Disease Screenings -->
+            <TextView
+                android:id="@+id/firstvisit_header_infectdiseasescreening"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/firstvisit_header_infectdiseasescreening"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700"/>
+
+            <!-- Input: Hepatitis B -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_question_hepb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_question_hepb"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_hepb"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_hepb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Unknown -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_hepb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_no_hepb"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_conditional_hepb"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_conditional_hepb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize"
+                    android:visibility="visible"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Human Immunodeficiency Virus -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_question_hiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_question_hiv"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_hiv"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_hiv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Unknown -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_hiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_no_hiv"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_conditional_hiv"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_conditional_hiv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize"
+                    android:visibility="visible"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Syphilis -->
+            <!-- Question Prompt -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_question_syph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_question_syph"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_syph"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_syph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Conditional Input If Unknown -->
+            <TextView
+                android:id="@+id/firstvisit_conditional_syph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_conditional_no_syph"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_conditional_syph"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_conditional_syph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize"
+                    android:visibility="visible"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/firstvisit_header_childvitals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/firstvisit_header_childsvitals"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700"/>
+
+            <!-- Input: Fetal Heart Rate -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput_firstvisit_fetalheartrate"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/firstvisit_input_fetalheartrate"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textedit_firstvisit_fetalheartrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="3"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Fetal Position  -->
+            <!-- Question Prompt: -->
+            <TextView
+                android:id="@+id/firstvisit_yesnoquestion_fetalposition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_dropdownquestions_fetalposition"
+                android:textSize="16sp" />
+
+            <!-- Fetal Position Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_fetalposition"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_fetalposition"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Input: Fetal Movement -->
+            <!-- Question Prompt: -->
+            <TextView
+                android:id="@+id/firstvisit_yesnoquestion_fetalmove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/firstvisit_dropdownquestions_fetalmove"
+                android:textSize="16sp" />
+
+            <!-- Yes or No Menu -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstvisit_layout_fetalmove"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/firstvisit_textinput_fetalmove"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/newpatient_input_unknown"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -215,9 +779,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginEnd="80dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/firstvisit_button_savefirstvisit" />
-
         </LinearLayout>
     </ScrollView>
 

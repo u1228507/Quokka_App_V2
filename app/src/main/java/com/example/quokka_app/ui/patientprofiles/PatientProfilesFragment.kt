@@ -1,10 +1,13 @@
 package com.example.quokka_app.ui.patientprofiles
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,25 +26,50 @@ class PatientProfilesFragment : Fragment() {
     private lateinit var patientProfilesDataClassArrayList: ArrayList<PatientProfilesDataClass>
     private lateinit var patientProfilesAdapter: PatientProfilesAdapter
     private lateinit var db: FirebaseFirestore
+    private lateinit var searchEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
+        Log.d("PatientProfilesFragment", "onCreateView() called")
+
         _binding = FragmentPatientprofilesBinding.inflate(inflater, container, false)
         val view = binding.root
+        searchEditText = binding.searchEditText
 
         recyclerView = binding.recyclerviewPatientprofiles
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-
         patientProfilesDataClassArrayList = arrayListOf()
         patientProfilesAdapter = PatientProfilesAdapter(patientProfilesDataClassArrayList, ItemClickListener())
         recyclerView.adapter = patientProfilesAdapter
 
         eventChangeListener()
+        setupSearch()
         return view
+    }
+
+    private fun setupSearch() {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No need to implement anything here
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString()
+                patientProfilesAdapter.filter(query)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val query = s.toString()
+                if (query.isEmpty()) {
+                    patientProfilesAdapter.setProfiles(patientProfilesDataClassArrayList)
+                }
+            }
+        })
     }
 
     private fun eventChangeListener() {
@@ -59,7 +87,7 @@ class PatientProfilesFragment : Fragment() {
                 for (dc: DocumentChange in value.documentChanges) {
                     if (dc.type == DocumentChange.Type.ADDED) {
                         val patientId = dc.document.id
-                        Log.d("PatientId", "Patient ID: $patientId") // Log the patient ID
+                        Log.d("PatientProfilesFragment", "Firestore Document Added: $patientId")
                         val generalInfoRef = db.collection("Patient Profiles")
                             .document(patientId)
                             .collection("Patient Profile Information")
@@ -124,4 +152,5 @@ class PatientProfilesFragment : Fragment() {
             findNavController().navigate(R.id.action_patientProfilesFragment_to_patientProfilesHomeFragment, bundle)
         }
     }
+
 }

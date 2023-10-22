@@ -8,5 +8,7 @@
     <string name="patientprofiles_image">Patient Profile Image</string>
     <string name="patientprofiles_unknown">Unknown</string>
     <string name="patientprofiles_buttontext_viewprofile">View Profile</string>
+    <string name="patientprofiles_searchbartext">Search For Patient</string>
+    <string name="patientprofiles_contentdescr_clearsearch">Clear Search</string>
 
 </resources>
