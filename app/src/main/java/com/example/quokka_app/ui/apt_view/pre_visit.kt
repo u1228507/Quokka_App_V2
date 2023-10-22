@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.quokka_app.R
+import android.widget.Spinner
+import android.widget.ArrayAdapter
 
 
 
@@ -16,6 +18,7 @@ import com.example.quokka_app.R
  */
 
 class pre_visit : Fragment(R.layout.fragment_pre_visit) {
+
 
 
 
