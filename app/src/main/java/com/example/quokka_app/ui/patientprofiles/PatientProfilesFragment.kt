@@ -145,6 +145,7 @@ class PatientProfilesFragment : Fragment() {
             bundle.putString("lastname", patientProfile.lastname)
             bundle.putString("dateofbirth", patientProfile.dateofbirth)
             bundle.putString("imageUrl", patientProfile.imageUrl)
+            bundle.putString("patientId",patientProfile.patientId)
 
             val patientProfilesHomeFragment = PatientProfilesHomeFragment()
             patientProfilesHomeFragment.arguments = bundle

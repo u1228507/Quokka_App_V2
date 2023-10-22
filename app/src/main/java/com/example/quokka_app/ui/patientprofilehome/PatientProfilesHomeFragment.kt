@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso
 
 class PatientProfilesHomeFragment : Fragment() {
     private var binding: FragmentPatientProfilesHomeBinding? = null
+    private val initialMotherProfileFragment = MotherProfileFragment()
+    private val args = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +24,12 @@ class PatientProfilesHomeFragment : Fragment() {
         val lastName = arguments?.getString("lastname")
         val imageUrl = arguments?.getString("imageUrl")
         val dateOfBirth = arguments?.getString("dateofbirth")
+
+
+
+        val patientId: String? = arguments?.getString("patientId")
+        args.putString("patientId", patientId)
+        initialMotherProfileFragment.arguments = args
 
         val textViewFirstName = binding?.pphFirstname
         val textViewLastName = binding?.pphLastname
@@ -46,6 +54,22 @@ class PatientProfilesHomeFragment : Fragment() {
         } else {
             imageViewPatient?.setImageResource(R.drawable.baseline_person_24_purple)
         }
+        childFragmentManager.beginTransaction()
+            .replace(R.id.patientprofilehome_fragmentContainer, initialMotherProfileFragment)
+            .commit()
+
+// Profile Buttons:
+        val motherButton = binding?.patientprofilehomeButtonMotherprofile
+        val childButton = binding?.patientprofilehomeButtonChildprofile
+
+        motherButton?.setOnClickListener {
+            args.putString("patientId", patientId)
+            replaceFragment(MotherProfileFragment(),args)
+        }
+        childButton?.setOnClickListener {
+            args.putString("patientId", patientId)
+            replaceFragment(ChildProfileFragment(), args)
+        }
         return binding?.root
     }
 
@@ -54,4 +78,13 @@ class PatientProfilesHomeFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+    private fun replaceFragment(fragment: Fragment, args: Bundle? = null) {
+        fragment.arguments = args
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.replace(R.id.patientprofilehome_fragmentContainer, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }
+

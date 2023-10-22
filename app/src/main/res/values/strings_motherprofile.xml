@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+// Record Child Birth Strings
+    // Buttons:
+    <string name="motherprofile_button_recordchildbirth">Record Child\'s Birth</string>
+    <string name="motherprofile_button_savenewborngeneralinfo">Save</string>
+    // Headers:
+    <string name="motherprofile_recordchildbirth_header">Newborn General Information</string>
+    <string name="motherprofile_recordchildbirth_sexofchild">Sex of Child:</string>
+    <string name="motherprofile_recordchildbirth_header_warning">Please only fill out this form after the child has been born</string>
+    // Inputs:
+    <string name="motherprofile_recordchildbirth_firstname">Child\'s First Name</string>
+    <string name="motherprofile_recordchildbirth_middlename">Child\'s Middle Name</string>
+    <string name="motherprofile_recordchildbirth_lastname">Child\'s Last Name</string>
+    <string name="motherprofile_recordchildbirth_dob">Child\'s Date of Birth</string>
+    // Arrays:
+    <string-array name="motherprofile_recordchildbirth_ynu">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Unknown</item>
+    </string-array>
+</resources>

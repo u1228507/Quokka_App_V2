@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.patientprofilehome.RecordChildBirthFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="UselessParent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/recordchildbirth_header_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/motherprofile_recordchildbirth_header_warning"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/darkpurple"/>
+
+        <TextView
+            android:id="@+id/recordchildbirth_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/motherprofile_recordchildbirth_header"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"/>
+
+        <!-- Input: First Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recordchildbirth_textinputlayout_firstname"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/motherprofile_recordchildbirth_firstname"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/baseline_error_24"
+            app:helperText="Required*"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/darkred"
+            app:startIconDrawable="@drawable/baseline_person_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recordchildbirth_textinputedit_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="31"
+                android:textColor="@color/black"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Input: Middle Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recordchildbirth_textinputlayout_middlename"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="0dp"
+            android:hint="@string/motherprofile_recordchildbirth_middlename"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/baseline_error_24"
+            app:startIconDrawable="@drawable/baseline_person_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recordchildbirth_textinputedit_middlename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="31"
+                android:textColor="@color/black"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Input: Last Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recordchildbirth_textinputlayout_lastname"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="0dp"
+            android:hint="@string/motherprofile_recordchildbirth_lastname"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/baseline_error_24"
+            app:helperText="Required*"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/darkred"
+            app:startIconDrawable="@drawable/baseline_person_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recordchildbirth_textinputedit_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="31"
+                android:textColor="@color/black"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Input: Date of Birth -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recordchildbirth_textinputlayout_dob"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="0dp"
+            android:hint="@string/motherprofile_recordchildbirth_dob"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/baseline_error_24"
+            app:helperText="Required*"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/darkred"
+            app:startIconDrawable="@drawable/baseline_calendar_month_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recordchildbirth_textinputedit_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:maxLength="10"
+                android:textColor="@color/black"
+                tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck,VisualLintTextFieldSize"
+                android:focusable="false"
+                android:clickable="true"
+                android:longClickable="false"
+                android:importantForAccessibility="no" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Input: Sex of Child -->
+        <TextView
+            android:id="@+id/recordchildbirth_header_sexofchild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="0dp"
+            android:text="@string/motherprofile_recordchildbirth_sexofchild"
+            android:textSize="16sp"/>
+        <!-- Yes or No Menu -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recordchildbirth_textinputlayout_sexofchild"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/recordchildbirth_dropdown_sexofchild"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/newpatient_input_unknown"
+                tools:ignore="LabelFor,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Button: Save Newborn General Information -->
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/motherprofile_button_savenewborngeneralinfo"
+            tools:ignore="VisualLintButtonSize" />
+    </LinearLayout>
+</ScrollView>
+
+</FrameLayout>
