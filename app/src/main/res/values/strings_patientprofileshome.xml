@@ -4,6 +4,9 @@
     <string name="patientprofileshome_label_firstname">First Name: %1$s</string>
     <string name="patientprofileshome_label_lastname">Last Name: %1$s</string>
     <string name="patientprofileshome_label_dateofbirth">Date of Birth: %1$s</string>
+    <string name="patientprofilehome_label_firstname_1">First Name:</string>
+    <string name="patientprofilehome_label_lastname_1">Last Name:</string>
+    <string name="patientprofilehome_label_dob_1">Date of Birth:</string>
 
 
     // Buttons:

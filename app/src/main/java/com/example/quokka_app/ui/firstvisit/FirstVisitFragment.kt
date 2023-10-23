@@ -22,7 +22,6 @@ import java.util.Locale
 class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     private var _binding: FragmentFirstVisitBinding? = null
     private val binding get() = _binding!!
-    private val calendar = Calendar.getInstance()
     private var isDueDateFieldClicked = false
 
     override fun onCreateView(
@@ -416,20 +415,21 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
 
     // Calendar View
     private fun showDatePickerDialog() {
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(requireContext(),
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
             { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
                 val selectedDate = String.format(Locale.US, "%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
-
                 if (isDueDateFieldClicked) {
                     binding.texteditFirstvisitDuedate.setText(selectedDate)
                 }
-            }, year, month, day)
-
-        datePickerDialog.datePicker.maxDate = calendar.timeInMillis // Set max date as today
+            }, year, month, day
+        )
+        val minDate = currentDate.timeInMillis
+        datePickerDialog.datePicker.minDate = minDate
         datePickerDialog.show()
     }
 

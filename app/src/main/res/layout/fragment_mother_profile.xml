@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
+        android:visibility="gone"
         android:text="@string/motherprofile_button_recordchildbirth" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

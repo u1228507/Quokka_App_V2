@@ -82,7 +82,7 @@ class PatientProfilesFragment : Fragment() {
 
                 val totalDocs = value!!.documentChanges.size
                 var processedDocs = 0
-                val sortedList = mutableListOf<PatientProfilesDataClass>() // ...
+                val sortedList = mutableListOf<PatientProfilesDataClass>()
 
                 for (dc: DocumentChange in value.documentChanges) {
                     if (dc.type == DocumentChange.Type.ADDED) {
@@ -108,7 +108,6 @@ class PatientProfilesFragment : Fragment() {
                             )
                             sortedList.add(patientProfile)
 
-                            // Check if all documents have been processed
                             if (++processedDocs == totalDocs) {
                                 sortedList.sortBy { it.lastname }
                                 patientProfilesDataClassArrayList.clear()
@@ -119,7 +118,6 @@ class PatientProfilesFragment : Fragment() {
                             .addOnFailureListener { e ->
                                 Log.e("Firestore Error", e.message.toString())
 
-                                // Ensure the counter is incremented even if there's an error
                                 if (++processedDocs == totalDocs) {
                                     sortedList.sortBy { it.lastname }
                                     patientProfilesDataClassArrayList.clear()
@@ -131,6 +129,7 @@ class PatientProfilesFragment : Fragment() {
                 }
             }
     }
+
 
 
     override fun onDestroyView() {

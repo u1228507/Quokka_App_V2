@@ -58,14 +58,11 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
                     val isChildInfoExists = document != null && document.exists()
 
                     if (isChildInfoExists) {
-                        // Child info document exists, hide the "Record Child Birth" button
                         binding.motherprofileButtonRecordchildsbirth.visibility = View.GONE
                     } else {
-                        // Child info document doesn't exist, show the "Record Child Birth" button
                         binding.motherprofileButtonRecordchildsbirth.visibility = View.VISIBLE
                     }
                 } else {
-                    // Handle the error
                     Log.e("MotherProfileFragment", "Error checking Child General Info", task.exception)
                 }
             }

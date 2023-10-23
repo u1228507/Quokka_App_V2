@@ -68,7 +68,7 @@ class RecordChildBirthFragment : Fragment() {
                     "middleName" to middleName,
                     "lastName" to lastName,
                     "dateOfBirth" to dateOfBirth,
-                    "sexofchild" to sexOfChild,
+                    "sexOfChild" to sexOfChild,
                     "childpatientid" to childPatientId
                 )
 
