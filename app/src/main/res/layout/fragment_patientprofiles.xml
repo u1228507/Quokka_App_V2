@@ -27,7 +27,8 @@
             android:backgroundTint="@color/white"
             android:textColor="@color/purple_700"
             android:textStyle="bold"
-            tools:ignore="Autofill" />
+            tools:ignore="Autofill"
+            android:cursorVisible="false"/>
 
         <ImageButton
             android:id="@+id/clearSearchButton"

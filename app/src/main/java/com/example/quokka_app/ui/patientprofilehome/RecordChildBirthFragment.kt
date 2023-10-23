@@ -115,7 +115,6 @@ class RecordChildBirthFragment : Fragment() {
         val minYear = year - 1
 
         val datePickerDialog = DatePickerDialog(requireContext(),
-            R.style.PurpleDatePickerDialog,
             { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
                 val selectedDate = String.format(Locale.US, "%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
                 binding.recordchildbirthTextinputeditDob.setText(selectedDate)

@@ -42,15 +42,53 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         val patientId = arguments?.getString("patientId")
 
         // Alert System:
-        // Temperature Validation
-        binding.texteditFirstvisitTemperature.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
+        // Temperature Alert
+        binding.texteditFirstvisitTemperature.setOnFocusChangeListener { _, temphasFocus ->
+            if (!temphasFocus) {
                 val temperatureValue =
                     binding.texteditFirstvisitTemperature.text.toString().toDoubleOrNull()
                 if (temperatureValue != null && (temperatureValue < 35.0 || temperatureValue > 38.0)) {
                     showTemperatureConfirmationDialog(temperatureValue)
                 }
             }
+        // Systolic BP Alert
+        binding.texteditFirstvisitSystolic.setOnFocusChangeListener { _, systolichasFocus ->
+            if (!systolichasFocus) {
+                val systolicBloodPressureValue =
+                    binding.texteditFirstvisitSystolic.text.toString().toDoubleOrNull()
+                if (systolicBloodPressureValue != null && (systolicBloodPressureValue < 90.0 || systolicBloodPressureValue > 140.0)) {
+                    showBloodPressureConfirmationSystolic(systolicBloodPressureValue)
+                }
+            }
+        // Diastolic BP Alert
+        binding.texteditFirstvisitDiastolic.setOnFocusChangeListener{_, diastolichasFocus ->
+            if (!diastolichasFocus) {
+                val diastolicBloodPressureValue = binding.texteditFirstvisitDiastolic.text.toString().toDoubleOrNull()
+                if (diastolicBloodPressureValue !=null && (diastolicBloodPressureValue < 55.0 || diastolicBloodPressureValue > 95.0)){
+                    showBloodPressureConfirmationDiastolic(diastolicBloodPressureValue)
+                }
+            }
+        }
+        // Heart Rate Alert
+        binding.texteditFirstvisitHeartrate.setOnFocusChangeListener { _, heartRatehasFocus ->
+            if (!heartRatehasFocus){
+                val heartRateValue = binding.texteditFirstvisitHeartrate.text.toString().toDoubleOrNull()
+                if (heartRateValue !=null && (heartRateValue <65.0 || heartRateValue > 110.0)){
+                    showHeartRateConfirmation(heartRateValue)
+                }
+            }
+        }
+        // Fetal Heart Rate Alert:
+        binding.texteditFirstvisitFetalheartrate.setOnFocusChangeListener{_, fetalHRhasFocus ->
+            if (!fetalHRhasFocus){
+                val fetalHRValue = binding.texteditFirstvisitFetalheartrate.text.toString().toDoubleOrNull()
+                if (fetalHRValue !=null && (fetalHRValue < 100.0 || fetalHRValue > 160.0)){
+                    showFetalHRConfirmation(fetalHRValue)
+                }
+            }
+        }
+        }
+
         }
 
         binding.firstvisitButtonSavefirstvisit.setOnClickListener {
@@ -438,7 +476,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     private fun showTemperatureConfirmationDialog(temperatureValue: Double) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Temperature Warning")
-        alertDialogBuilder.setMessage("The inputted temperature ($temperatureValue °C) is outside the normal range (35-38 °C). Are you sure this is the intended value?")
+        alertDialogBuilder.setMessage("The inputted temperature ($temperatureValue °C) is outside the normal range (35 to 38 °C). Are you sure this is the intended value?")
         alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
         }
         alertDialogBuilder.setNegativeButton("No") { _, _ ->
@@ -448,4 +486,51 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         alertDialog.show()
     }
 
+    private fun showBloodPressureConfirmationSystolic(systolicBloodPressureValue: Double) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Systolic Blood Pressure Warning")
+        alertDialogBuilder.setMessage("The inputted systolic blood pressure value ($systolicBloodPressureValue mmHg) is outside the normal range (90-140 mmHg). Are you sure this is the intended value?")
+        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->}
+        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+            binding.texteditFirstvisitSystolic.text?.clear()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun showBloodPressureConfirmationDiastolic(diastolicBloodPressureValue: Double) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Diastolic Blood Pressure Warning")
+        alertDialogBuilder.setMessage("The inputted diastolic blood pressure value ($diastolicBloodPressureValue mmHg) is outside the normal range (55-140 mmHg). Are you sure this is the intended value?")
+        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->}
+        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+            binding.texteditFirstvisitDiastolic.text?.clear()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun showHeartRateConfirmation(heartRateValue: Double) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Heart Rate Warning")
+        alertDialogBuilder.setMessage("The inputted heart rate value ($heartRateValue mmHg) is outside the normal range (65 to 114 bpm). Are you sure this is the intended value?")
+        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->}
+        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+            binding.texteditFirstvisitHeartrate.text?.clear()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun showFetalHRConfirmation(fetalHRValue: Double) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Fetal Heart Rate Warning")
+        alertDialogBuilder.setMessage("The inputted fetal heart rate value ($fetalHRValue mmHg) is outside the normal range (110 to 160 bpm). Are you sure this is the intended value?")
+        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->}
+        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+            binding.texteditFirstvisitFetalheartrate.text?.clear()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
 }

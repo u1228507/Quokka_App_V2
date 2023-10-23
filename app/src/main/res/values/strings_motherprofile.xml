@@ -2,7 +2,7 @@
 <resources>
 // Record Child Birth Strings
     // Buttons:
-    <string name="motherprofile_button_recordchildbirth">Record Child\'s Birth</string>
+    <string name="motherprofile_button_recordchildbirth">Record Birth of Child</string>
     <string name="motherprofile_button_savenewborngeneralinfo">Save</string>
     // Headers:
     <string name="motherprofile_recordchildbirth_header">Newborn General Information</string>
@@ -19,4 +19,35 @@
         <item>Male</item>
         <item>Unknown</item>
     </string-array>
+
+
+// Mother Personal Info Fragment Strings
+    <string name="motherprofile_motherinfo_motherfirstname">First Name</string>
+    <string name="motherprofile_motherinfo_mothermiddlename">Middle Name</string>
+    <string name="motherprofile_motherinfo_motherlastname">Last Name</string>
+    <string name="motherprofile_motherinfo_motherdob">Date of Birth</string>
+    <string name="motherprofile_motherinfo_village">Village</string>
+    <string name="motherprofile_motherinfo_motherphonenumber">Mother Phone Number</string>
+    <string name="motherprofile_motherinfo_fatherfirstname">Father\'s First Name</string>
+    <string name="motherprofile_motherinfo_fathermiddlename">Father\'s Middle Name</string>
+    <string name="motherprofile_motherinfo_fathervillage">Father\'s Village</string>
+    <string name="motherprofile_motherinfo_fatherphonenumber">Father\'s Phone Number</string>
+    <string name="motherprofile_motherinfo_fchwfirstname">FCHW\'s First Name</string>
+    <string name="motherprofile_motherinfo_fchwlastname">FCHW\'s Last Name</string>
+    <string name="motherprofile_motherinfo_fchwphonenumber">FCHW\'s Phone Number</string>
+
+    <string name="motherprofile_motherinfo_motherfirstname2">First Name: %1$sv</string>
+    <string name="motherprofile_motherinfo_mothermiddlename2">Middle Name: %1$s</string>
+    <string name="motherprofile_motherinfo_motherlastname2">Last Name: %1$s</string>
+    <string name="motherprofile_motherinfo_motherdob2">Date of Birth: %1$s</string>
+    <string name="motherprofile_motherinfo_village2">Village: %1$s</string>
+    <string name="motherprofile_motherinfo_motherphonenumber2">Mother Phone Number: %1$s</string>
+    <string name="motherprofile_motherinfo_fatherfirstname2">Father\'s First Name: %1$s</string>
+    <string name="motherprofile_motherinfo_fathermiddlename2">Father\'s Middle Name: %1$s</string>
+    <string name="motherprofile_motherinfo_fathervillage2">Father\'s Village: %1$s</string>
+    <string name="motherprofile_motherinfo_fatherphonenumber2">Father\'s Phone Number: %1$s</string>
+    <string name="motherprofile_motherinfo_fchwfirstname2">FCHW\'s First Name: %1$s</string>
+    <string name="motherprofile_motherinfo_fchwlastname2">FCHW\'s Last Name: %1$s</string>
+    <string name="motherprofile_motherinfo_fchwphonenumber2">FCHW\'s Phone Number: %1$s</string>
+
 </resources>

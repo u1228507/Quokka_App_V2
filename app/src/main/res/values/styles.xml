@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="PurpleDatePickerDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
-        <item name="colorPrimary">@color/purple_700</item>
-    </style>
-
-</resources>

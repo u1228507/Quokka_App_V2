@@ -4,7 +4,7 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@color/purple_700" /> <!-- Change to your desired button background color -->
-            <corners android:radius="0dp" /> <!-- Set the corner radius to 0dp to make it square with no rounded edges -->
+            <corners android:radius="30dp" /> <!-- Set the corner radius to 0dp to make it square with no rounded edges -->
         </shape>
     </item>
 </layer-list>

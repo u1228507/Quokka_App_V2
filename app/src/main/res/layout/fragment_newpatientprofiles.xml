@@ -1152,7 +1152,6 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:hint="@string/newpatienti_hint_drugtype"
-                app:counterEnabled="true"
                 app:counterMaxLength="100"
                 android:visibility="visible"
                 app:endIconMode="clear_text"
