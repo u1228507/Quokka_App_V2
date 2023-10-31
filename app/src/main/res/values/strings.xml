@@ -14,11 +14,12 @@
     <string name="menu_newpatientprofiles">New Patient Profiles</string>
     <string name="menu_userprofile">User Profile</string>
     <string name="menu_patientprofiles">Patient Profiles</string>
+    <string name="menu_firstvisit">First Visit</string>
+    <string name="menu_patientprofileshome">Patient Profiles Home</string>
 
     // Strings For Login
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

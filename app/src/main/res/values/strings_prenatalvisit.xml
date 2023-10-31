@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Headers
+    <string name="prenatal_header_prenatalvisit">Prenatal Visit</string>
+    <string name="prenatal_headers_blankfields">Leave fields blank if information is not collected</string>
+    <string name="prenatal_header_motherprenatalvisit">Mother Prenatal Information</string>
+    <string name="prenatal_header_childprenatalvisit">Child Prenatal Information</string>
+    <string name="prenatal_header_fetalmovement">Was fetal movement detected during the visit?</string>
+    <string name="prenatal_header_fetalposition">Fetal Position:</string>
+
+
+    // Inputs
+    <string name="prenatal_input_fundalheight">Fundal Height (cm)</string>
+    <string name="prenatal_input_othercomments">Other Comments</string>
+    <string name="prenatal_input_fetalheartrate">Fetal Heart Rate (bpm)</string>
+
+    // Arrays:
+<string-array name="prenatal_header_fetalposition">
+    <item>Anterior</item>
+    <item>Posterior</item>
+    <item>Complete Breech</item>
+    <item>Frank Breech</item>
+    <item>Footling Breech</item>
+    <item>Transverse Lie</item>
+</string-array>
+
+    // Buttons
+    <string name="prenatal_button_save">Save Visit</string>
+</resources>

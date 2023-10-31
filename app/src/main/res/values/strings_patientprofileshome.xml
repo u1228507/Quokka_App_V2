@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="patientprofileshome_patientimage">Patient Profile Image</string>
+    <string name="patientprofileshome_label_firstname">First Name: %1$s</string>
+    <string name="patientprofileshome_label_lastname">Last Name: %1$s</string>
+    <string name="patientprofileshome_label_dateofbirth">Date of Birth: %1$s</string>
+    <string name="patientprofilehome_label_firstname_1">First Name:</string>
+    <string name="patientprofilehome_label_lastname_1">Last Name:</string>
+    <string name="patientprofilehome_label_dob_1">Date of Birth:</string>
+
+
+    // Buttons:
+    <string name="patientprofileshome_button_motherprofile">Mother\'s Profile</string>
+    <string name="patientprofileshome_button_childprofile">Child\'s Profile</string>
+    <string name="patientprofileshome_button_personalinformation">Mother\'s Personal Information</string>
+    <string name="patientprofileshome_button_pastvisits">Past Visits</string>
+    <string name="patientprofileshome_button_recordprenatal">Record Prenatal Visit</string>
+    <string name="patientprofileshome_button_recordpostpartum">Record Postpartum Visit</string>
+
+</resources>

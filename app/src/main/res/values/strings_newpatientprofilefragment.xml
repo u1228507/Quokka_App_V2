@@ -38,7 +38,7 @@
 
     // Hints
     <string name="newpatient_hint_motherbirthdefect">Mother Birth Defects</string>
-    <string name="newpatienti_hint_drugtype">Types of Drugs</string>
+    <string name="newpatienti_hint_drugtype">Types of Recreational Drugs</string>
     <string name="newpatient_hint_alcohol">Alcohol Consumption</string>
     <string name="newpatient_hint_firstpreg">First Pregnancy?</string>
     <string name="newpatient_hint_lastmenst">Last Menstrual Cycle</string>
@@ -103,7 +103,7 @@
     <string name="newpatient_conditional_alcoholconsump">Has the patient consumed alcohol during the pregnancy?</string>
     <string name="newpatient_conditional_smoking">Does the patient smoke tobacco or use nicotine-containing products? </string>
     <string name="newpatient_conditional_drugs">Does the patient use any recreational drugs</string>
-    <string name="newpatient_conditional_drugtype"> What types of drugs does the patient use?</string>
+    <string name="newpatient_conditional_drugtype"> What types of recreational drugs does the patient use?</string>
 
 
     // Button Strings:

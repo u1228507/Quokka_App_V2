@@ -28,7 +28,7 @@
                 android:text="@string/newpatient_inputheader_unknownquestion"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/darkred"/>
+                android:textColor="@color/darkpurple"/>
 
             <!-- Header: Mothers Personal Information -->
             <TextView
@@ -124,7 +124,7 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Input: Date of Birth (Still Need To Work On How User Inputs This) -->
+            <!-- Input: Date of Birth -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_dob"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
@@ -189,7 +189,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_motherscontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24"
                 app:helperText="Required*"
@@ -200,8 +199,7 @@
                     android:id="@+id/textinputedit_motherscontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLength="11"
+                    android:inputType="number"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -357,7 +355,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_fatherscontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24">
 
@@ -365,7 +362,7 @@
                     android:id="@+id/textinputedit_fatherscontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
@@ -450,7 +447,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_fchwcontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24"
                 app:helperText="Required*"
@@ -461,7 +457,7 @@
                     android:id="@+id/textinputedit_fchwcontactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/black"
                     tools:ignore="TextContrastCheck" />
@@ -616,6 +612,8 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:hint="@string/newpatient_hint_motherbirthdefect"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
                 android:visibility="visible"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
@@ -945,7 +943,7 @@
                 android:layout_marginTop="-20dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/newpatient_input_pregseizures"
+                android:text="@string/motherprofile_recordchildbirth_sexofchild"
                 android:textSize="16sp"
                 android:visibility="gone"/>
 
@@ -1153,6 +1151,7 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:hint="@string/newpatienti_hint_drugtype"
+                app:counterMaxLength="100"
                 android:visibility="visible"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"

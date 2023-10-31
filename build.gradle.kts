@@ -1,8 +1,9 @@
 buildscript {
     val kotlin_version by extra("1.9.10")
     dependencies {
-        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.gms:google-services:4.4.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.4")
     }
     repositories {
         mavenCentral()
