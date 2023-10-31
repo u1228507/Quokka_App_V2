@@ -36,18 +36,18 @@
     <string name="motherprofile_motherinfo_fchwlastname">FCHW\'s Last Name</string>
     <string name="motherprofile_motherinfo_fchwphonenumber">FCHW\'s Phone Number</string>
 
-    <string name="motherprofile_motherinfo_motherfirstname2">First Name: %1$sv</string>
-    <string name="motherprofile_motherinfo_mothermiddlename2">Middle Name: %1$s</string>
-    <string name="motherprofile_motherinfo_motherlastname2">Last Name: %1$s</string>
-    <string name="motherprofile_motherinfo_motherdob2">Date of Birth: %1$s</string>
-    <string name="motherprofile_motherinfo_village2">Village: %1$s</string>
-    <string name="motherprofile_motherinfo_motherphonenumber2">Mother Phone Number: %1$s</string>
-    <string name="motherprofile_motherinfo_fatherfirstname2">Father\'s First Name: %1$s</string>
-    <string name="motherprofile_motherinfo_fathermiddlename2">Father\'s Middle Name: %1$s</string>
-    <string name="motherprofile_motherinfo_fathervillage2">Father\'s Village: %1$s</string>
-    <string name="motherprofile_motherinfo_fatherphonenumber2">Father\'s Phone Number: %1$s</string>
-    <string name="motherprofile_motherinfo_fchwfirstname2">FCHW\'s First Name: %1$s</string>
-    <string name="motherprofile_motherinfo_fchwlastname2">FCHW\'s Last Name: %1$s</string>
-    <string name="motherprofile_motherinfo_fchwphonenumber2">FCHW\'s Phone Number: %1$s</string>
+    <string name="motherprofile_motherinfo_motherfirstname2">First Name: </string>
+    <string name="motherprofile_motherinfo_mothermiddlename2">Middle Name: </string>
+    <string name="motherprofile_motherinfo_motherlastname2">Last Name: </string>
+    <string name="motherprofile_motherinfo_motherdob2">Date of Birth: </string>
+    <string name="motherprofile_motherinfo_village2">Village: </string>
+    <string name="motherprofile_motherinfo_motherphonenumber2">Mother Phone Number: </string>
+    <string name="motherprofile_motherinfo_fatherfirstname2">Father\'s First Name: </string>
+    <string name="motherprofile_motherinfo_fathermiddlename2">Father\'s Middle Name: </string>
+    <string name="motherprofile_motherinfo_fathervillage2">Father\'s Village: </string>
+    <string name="motherprofile_motherinfo_fatherphonenumber2">Father\'s Phone Number: </string>
+    <string name="motherprofile_motherinfo_fchwfirstname2">FCHW\'s First Name: </string>
+    <string name="motherprofile_motherinfo_fchwlastname2">FCHW\'s Last Name: </string>
+    <string name="motherprofile_motherinfo_fchwphonenumber2">FCHW\'s Phone Number: </string>
 
 </resources>

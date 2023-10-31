@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Headers
+    <string name="postpartum_header_postpartumvisit">Postpartum Visit</string>
+    <string name="postpartum_header_motherpostpartumvisit">Mother Postpartum Information</string>
+    <string name="postpartum_header_childpostpartumvisit">Child Postpartum Information</string>
+
+    // Inputs
+    <string name="postpartum_input_headcirc">Head Circumference (cm)</string>
+    <string name="postpartum_input_resprate">Respiratory Rate (breaths per min)</string>
+    <string name="postpartum_input_feeding">Feedings Per Day</string>
+
+    // Buttons
+    <string name="postpartum_button_save">Save Visit</string>
+
+</resources>

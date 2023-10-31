@@ -8,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentMotherProfileBinding
+import com.example.quokka_app.ui.postpartumvisit.PostpartumVisitFragment
+import com.example.quokka_app.ui.prenatalvisit.PrenatalVisitFragment
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
     private lateinit var binding: FragmentMotherProfileBinding
     private val recordChildsBirthFragment = RecordChildBirthFragment()
-
+    private val motherPersonalInfoFragment = MotherPersonalInfoFragment()
+    private val pastVisitsFragment: PastVisitsFragment = PastVisitsFragment()
+    private val prenatalVisitsFragment: PrenatalVisitFragment = PrenatalVisitFragment()
+    private val postpartumVisitFragment: PostpartumVisitFragment = PostpartumVisitFragment()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +34,10 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
         recordChildsBirthFragment.arguments = args
 
         val recordChildsBirthButton = binding.motherprofileButtonRecordchildsbirth
+        val personalInformationButton = binding.patientprofileshomeButtonPersonalinformation
+        val pastVisitsButton = binding.patientprofileshomeButtonPastvisits
+        val prenatalVisitButton = binding.patientprofileshomeButtonRecordprenatal
+        val postpartumVisitButton = binding.patientprofileshomeButtonRecordpostpartum
 
         if (patientId.isNotBlank()) {
             isChildGeneralInfoExist(patientId)
@@ -39,6 +49,35 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
                 .addToBackStack(null)
                 .commit()
         }
+
+        personalInformationButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.patientprofilehome_fragmentContainer,motherPersonalInfoFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        pastVisitsButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.patientprofilehome_fragmentContainer,pastVisitsFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        prenatalVisitButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.patientprofilehome_fragmentContainer,prenatalVisitsFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        postpartumVisitButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.patientprofilehome_fragmentContainer,postpartumVisitFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
 
 
         return view

@@ -447,7 +447,6 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/newpatient_input_fchwcontactnumber"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24"
                 app:helperText="Required*"
