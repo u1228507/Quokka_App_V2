@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.patientprofilehome.MotherPersonalInfoFragment">
-<LinearLayout
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="UselessParent"
@@ -16,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_motherfirstname2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -23,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_mothermiddlename2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -30,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_motherlastname2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -37,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_motherdob2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -44,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_village2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -51,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_motherphonenumber2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -58,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fatherfirstname2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -65,13 +77,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fathermiddlename2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
+
+    <TextView
+         android:id="@+id/motherprofile_motherinfo_fatherlastname2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/motherprofile_motherinfo_fatherlastname2"
+         android:textSize="20sp"
+         android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/motherprofile_motherinfo_fathervillage2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fathervillage2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -79,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fatherphonenumber2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -86,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fchwfirstname2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -93,6 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fchwlastname2"
+        android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -100,26 +125,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/motherprofile_motherinfo_fchwphonenumber2"
-        android:layout_marginTop="20dp" />
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
 </LinearLayout>
 
-    <!-- Edit Icon & Text -->
-    <ImageView
-        android:id="@+id/editIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_mode_edit_24"
-        android:layout_marginTop="20dp"
-        android:importantForAccessibility="no" />
-
-    <EditText
-        android:id="@+id/motherinfo_editTextFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/motherprofile_motherinfo_motherfirstname"
-        android:layout_below="@+id/editIcon"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:inputType="textPersonName"
-        tools:ignore="ObsoleteLayoutParam" />
+    </ScrollView>
 </FrameLayout>
