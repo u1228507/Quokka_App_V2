@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentFirstVisitBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
@@ -135,7 +136,9 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                 hivlabs = hivlabs,
                 syph = syph,
                 syphlabs = syphlabs,
-                duedate = dueDate
+                duedate = dueDate,
+                date = getCurrentDateTimeAsString()
+
             )
 
            if (alertsToSave.isNotEmpty()) {
@@ -586,4 +589,13 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-    }}
+
+    }
+    private fun getCurrentDateTimeAsString(): String {
+        val dateFormat = SimpleDateFormat("ddMMyyyy",Locale.getDefault())
+        val date = System.currentTimeMillis()
+        return dateFormat.format(date)
+    }
+
+
+}

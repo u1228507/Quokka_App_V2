@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.quokka_app.ui.settings.settingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
         android:id="@+id/nav_newpatientprofiles"
         android:name="com.example.quokka_app.ui.newpatientprofile.NewPatientProfileFragment"
         android:label="@string/menu_newpatientprofiles"
@@ -29,11 +35,13 @@
         android:label="@string/menu_patientprofiles"
         tools:layout="@layout/fragment_patientprofiles"/>
 
+
     <fragment
         android:id="@+id/nav_userprofile"
         android:name="com.example.quokka_app.ui.userprofile.UserProfileFragment"
         android:label="@string/menu_userprofile"
         tools:layout="@layout/fragment_userprofile" />
+
 
     <fragment
         android:id="@+id/nav_patientprofileshome"
@@ -60,8 +68,27 @@
         app:destination="@id/nav_patientprofileshome" />
 
     <action
-        android:id="@+id/action_firstvisitfragment_to_patientprofilesfragment"
+        android:id="@+id/action_Home_to_patientprofilesfragment"
         app:destination="@id/nav_patientprofiles"
         />
+
+    <action
+        android:id="@+id/action_HomeFragment_to_patientProfilesHomeFragment"
+        app:destination="@+id/nav_patientprofiles"
+        />
+
+    <action
+        android:id="@+id/action_HomeFragment_to_newpatientprofiles"
+        app:destination="@+id/nav_newpatientprofiles"
+        />
+
+    <action
+        android:id="@+id/action_firstvisitfragment_to_patientprofilesfragment"
+        app:destination="@+id/nav_patientprofiles"
+        />
+
+    <action
+        android:id="@+id/action_settings2"
+        app:destination="@id/nav_settings" />
 
 </navigation>
