@@ -91,4 +91,8 @@
         android:id="@+id/action_settings2"
         app:destination="@id/nav_settings" />
 
+    <action
+        android:id="@+id/global_action_HomeFragment"
+        app:destination="@id/nav_home" />
+
 </navigation>
