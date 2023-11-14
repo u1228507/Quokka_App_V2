@@ -132,7 +132,8 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                 hivlabs = hivlabs,
                 syph = syph,
                 syphlabs = syphlabs,
-                duedate = dueDate
+                duedate = dueDate,
+                date = getCurrentDateTimeAsString()
             )
 
             if ((systolic.isNotBlank() && diastolic.isBlank()) ||

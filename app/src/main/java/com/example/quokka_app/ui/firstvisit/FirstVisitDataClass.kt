@@ -17,6 +17,7 @@ data class FirstVisitDataClass(
     val hivlabs: String,
     val syph: String,
     val syphlabs: String,
-    val duedate: String
+    val duedate: String,
+    val date: String
 
 )
