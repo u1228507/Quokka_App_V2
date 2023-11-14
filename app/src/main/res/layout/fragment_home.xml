@@ -8,10 +8,10 @@
     tools:context=".ui.home.HomeFragment">
 
     <Button
-        android:id="@+id/buttonTop"
+        android:id="@+id/button_home_patientprofiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Patient Profiles"
+        android:text="@string/home_button_patientprofiles"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,10 +42,10 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/buttonBottom"
+        android:id="@+id/button_home_newpatientprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Patient Profiles"
+        android:text="@string/home_button_newpatientprofiles"
         app:layout_constraintTop_toBottomOf="@+id/circularImageContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

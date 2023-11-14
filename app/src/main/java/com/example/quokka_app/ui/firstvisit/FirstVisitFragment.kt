@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentFirstVisitBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
@@ -24,7 +24,6 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     private var _binding: FragmentFirstVisitBinding? = null
     private val binding get() = _binding!!
     private var isDueDateFieldClicked = false
-    private val alertsToSave = mutableListOf<Pair<String, String>>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +41,6 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         val imageUrl = arguments?.getString("imageUrl")
         val dateOfBirth = arguments?.getString("dateofbirth")
         val patientId = arguments?.getString("patientId")
-        Log.d("Pegasus", "patientId: $patientId")
 
 
         // Alert System:
@@ -55,6 +53,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                     showTemperatureConfirmationDialog(temperatureValue)
                 }
             }
+        }
         // Systolic BP Alert
         binding.texteditFirstvisitSystolic.setOnFocusChangeListener { _, systolichasFocus ->
             if (!systolichasFocus) {
@@ -64,6 +63,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                     showBloodPressureConfirmationSystolic(systolicBloodPressureValue)
                 }
             }
+        }
         // Diastolic BP Alert
         binding.texteditFirstvisitDiastolic.setOnFocusChangeListener{_, diastolichasFocus ->
             if (!diastolichasFocus) {
@@ -90,9 +90,6 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                     showFetalHRConfirmation(fetalHRValue)
                 }
             }
-        }
-        }
-
         }
 
         binding.firstvisitButtonSavefirstvisit.setOnClickListener {
@@ -138,16 +135,23 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                 duedate = dueDate
             )
 
-           if (alertsToSave.isNotEmpty()) {
-             saveAlerts(alertsToSave)
+            if ((systolic.isNotBlank() && diastolic.isBlank()) ||
+                (systolic.isBlank() && diastolic.isNotBlank())
+            ) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter both systolic and diastolic values or leave both blank",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
             }
-            val firestore = FirebaseFirestore.getInstance()
 
+            val firestore = FirebaseFirestore.getInstance()
             if (patientId != null) {
                 val patientProfilesCollection = firestore.collection("Patient Profiles")
                 val patientDocument = patientProfilesCollection.document(patientId)
                 val visitsCollection = patientDocument.collection("Visits")
-                val visitDocument = visitsCollection.document("Prenatal Visit 1")
+                val visitDocument = visitsCollection.document("First Visit")
 
                 visitDocument.set(firstVisitData)
                     .addOnSuccessListener {
@@ -161,7 +165,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                         val prenatalVisitsCollection =
                             childCollection.document("Visits").collection("PrenatalVisits")
                         val prenatalChildVisitDocument =
-                            prenatalVisitsCollection.document("PrenatalChildVisit1")
+                            prenatalVisitsCollection.document("First Visit")
 
                         val fetalData = mapOf(
                             "fetalHeartRate" to fetalHeartRate,
@@ -477,6 +481,11 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         datePickerDialog.datePicker.minDate = minDate
         datePickerDialog.show()
     }
+    private fun getCurrentDateTimeAsString(): String {
+        val dateFormat = SimpleDateFormat("ddMMyyyyHHmm", Locale.getDefault())
+        val date = System.currentTimeMillis()
+        return dateFormat.format(date)
+    }
 
     // Alert System Functions
     // Temperature
@@ -485,8 +494,10 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         alertDialogBuilder.setTitle("Temperature Warning")
         alertDialogBuilder.setMessage("The inputted temperature ($temperatureValue °C) is outside the normal range (35 to 38 °C). Are you sure this is the intended value?")
         alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
-            alertsToSave.add("Temperature" to temperatureValue.toString())
-        }
+            val visitDate = getCurrentDateTimeAsString()
+            val patientId = arguments?.getString("patientId") ?: ""
+            val alertsToSave = listOf("temperature" to temperatureValue.toString())
+            saveAlerts(patientId, "Mother", visitDate, alertsToSave)        }
         alertDialogBuilder.setNegativeButton("No") { _, _ ->
             binding.texteditFirstvisitTemperature.text?.clear()
         }
@@ -498,11 +509,13 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Systolic Blood Pressure Warning")
         alertDialogBuilder.setMessage("The inputted systolic blood pressure value ($systolicBloodPressureValue mmHg) is outside the normal range (90-140 mmHg). Are you sure this is the intended value?")
-        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->
-            alertsToSave.add("Systolic" to systolicBloodPressureValue.toString())
-
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            val visitDate = getCurrentDateTimeAsString()
+            val patientId = arguments?.getString("patientId") ?: ""
+            val alertsToSave = listOf("systolic" to systolicBloodPressureValue.toString())
+            saveAlerts(patientId, "Mother", visitDate, alertsToSave)
         }
-        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+        alertDialogBuilder.setNegativeButton("No") { _, _ ->
             binding.texteditFirstvisitSystolic.text?.clear()
         }
         val alertDialog = alertDialogBuilder.create()
@@ -512,12 +525,14 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     private fun showBloodPressureConfirmationDiastolic(diastolicBloodPressureValue: Double) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Diastolic Blood Pressure Warning")
-        alertDialogBuilder.setMessage("The inputted diastolic blood pressure value ($diastolicBloodPressureValue mmHg) is outside the normal range (55-140 mmHg). Are you sure this is the intended value?")
-        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->
-            alertsToSave.add("Diastolic" to diastolicBloodPressureValue.toString())
-
+        alertDialogBuilder.setMessage("The inputted diastolic blood pressure value ($diastolicBloodPressureValue mmHg) is outside the normal range (55-95 mmHg). Are you sure this is the intended value?")
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            val visitDate = getCurrentDateTimeAsString()
+            val patientId = arguments?.getString("patientId") ?: ""
+            val alertsToSave = listOf("diastolic" to diastolicBloodPressureValue.toString())
+            saveAlerts(patientId, "Mother", visitDate, alertsToSave)
         }
-        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+        alertDialogBuilder.setNegativeButton("No") { _, _ ->
             binding.texteditFirstvisitDiastolic.text?.clear()
         }
         val alertDialog = alertDialogBuilder.create()
@@ -528,10 +543,12 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Heart Rate Warning")
         alertDialogBuilder.setMessage("The inputted heart rate value ($heartRateValue mmHg) is outside the normal range (65 to 114 bpm). Are you sure this is the intended value?")
-        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->
-            alertsToSave.add("Heart Rate" to heartRateValue.toString())
-        }
-        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            val visitDate = getCurrentDateTimeAsString()
+            val patientId = arguments?.getString("patientId") ?: ""
+            val alertsToSave = listOf("heartrate" to heartRateValue.toString())
+            saveAlerts(patientId, "Mother", visitDate, alertsToSave)        }
+        alertDialogBuilder.setNegativeButton("No") { _, _ ->
             binding.texteditFirstvisitHeartrate.text?.clear()
         }
         val alertDialog = alertDialogBuilder.create()
@@ -542,48 +559,71 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Fetal Heart Rate Warning")
         alertDialogBuilder.setMessage("The inputted fetal heart rate value ($fetalHRValue mmHg) is outside the normal range (110 to 160 bpm). Are you sure this is the intended value?")
-        alertDialogBuilder.setPositiveButton("Yes"){_, _ ->
-            alertsToSave.add("Fetal Heart Rate" to fetalHRValue.toString())
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            val visitDate = getCurrentDateTimeAsString()
+            val patientId = arguments?.getString("patientId") ?: ""
+            val alertsToSave = listOf("fetalhr" to fetalHRValue.toString())
+            saveAlerts(patientId, "Child", visitDate, alertsToSave)
         }
-        alertDialogBuilder.setNegativeButton("No"){_,_ ->
+        alertDialogBuilder.setNegativeButton("No") { _, _ ->
             binding.texteditFirstvisitFetalheartrate.text?.clear()
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
 
-    private fun saveAlerts(alertsToSave: List<Pair<String, String>>) {
-        val patientId = arguments?.getString("patientId")
+    private fun saveAlerts(
+        patientId: String,
+        visitType: String,
+        visitDate: String,
+        alertsToSave: List<Pair<String, String>>
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         val patientProfilesCollection = firestore.collection("Patient Profiles")
-        val patientDocument = patientProfilesCollection.document(patientId ?: "")
-        val prenatalVisitsCollection = patientDocument.collection("Child").document("Visits").collection("PrenatalVisits")
-        val prenatalChildVisitDocument = prenatalVisitsCollection.document("PrenatalChildVisit1")
-        val alertsCollection = prenatalChildVisitDocument.collection("Notifications")
-
-        val alertsMap = HashMap<String, String>()
-        for ((fieldName, alertValue) in alertsToSave) {
-            alertsMap[fieldName] = alertValue
+        val patientDocument = patientProfilesCollection.document(patientId)
+        val visitSubcollection = if (visitType == "Mother") {
+            patientDocument.collection("Visits")
+        } else {
+            patientDocument.collection("Child").document("Visits").collection("PrenatalVisits")
         }
+        val visitDocument = visitSubcollection.document("First Visit")
+        val alertsCollection = visitDocument.collection("Alerts")
+        val existingAlertsDocument = alertsCollection.document("HealthAlerts")
 
-        val batch = firestore.batch()
+        existingAlertsDocument.get()
+            .addOnSuccessListener { documentSnapshot ->
+                val batch = firestore.batch()
+                val alertsMap = HashMap<String, String>()
 
-            val newAlertDocument = alertsCollection.document("Health Alerts")
-            batch.set(newAlertDocument, alertsMap)
+                if (documentSnapshot.exists()) {
+                    val existingData = documentSnapshot.data
+                    if (existingData != null) {
+                        alertsMap.putAll(existingData as Map<String, String>)
+                    }
+                }
+                for ((fieldName, alertValue) in alertsToSave) {
+                    alertsMap[fieldName] = alertValue
+                }
+                batch.set(existingAlertsDocument, alertsMap)
 
-        batch.commit()
-            .addOnSuccessListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Health alerts saved successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
+                batch.commit()
+                    .addOnSuccessListener {
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed to save health alerts: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(
                     requireContext(),
-                    "Failed to save health alerts: ${e.message}",
+                    "Failed to retrieve existing health alerts: ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-    }}
+    }
+
+}
