@@ -33,6 +33,8 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
         args.putString("patientId", patientId)
         recordChildsBirthFragment.arguments = args
         motherPersonalInfoFragment.arguments = args
+        prenatalVisitsFragment.arguments = args
+        postpartumVisitFragment.arguments = args
 
         val recordChildsBirthButton = binding.motherprofileButtonRecordchildsbirth
         val personalInformationButton = binding.patientprofileshomeButtonPersonalinformation

@@ -64,4 +64,6 @@
         app:destination="@id/nav_patientprofiles"
         />
 
+
+
 </navigation>

@@ -13,6 +13,7 @@
     <string name="prenatal_input_fundalheight">Fundal Height (cm)</string>
     <string name="prenatal_input_othercomments">Other Comments</string>
     <string name="prenatal_input_fetalheartrate">Fetal Heart Rate (bpm)</string>
+    <string name="prenatal_input_unknown">Unknown</string>
 
     // Arrays:
 <string-array name="prenatal_header_fetalposition">
@@ -22,7 +23,14 @@
     <item>Frank Breech</item>
     <item>Footling Breech</item>
     <item>Transverse Lie</item>
+    <item>Unknown</item>
 </string-array>
+
+    <string-array name="prenatal_fetalmovement">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Unknown</item>
+    </string-array>
 
     // Buttons
     <string name="prenatal_button_save">Save Visit</string>
