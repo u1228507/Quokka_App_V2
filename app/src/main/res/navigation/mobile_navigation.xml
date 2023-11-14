@@ -65,5 +65,16 @@
         />
 
 
+    <action
+        android:id="@+id/action_HomeFragment_to_patientProfilesHomeFragment"
+        app:destination="@+id/nav_patientprofiles"
+        />
+
+    <action
+        android:id="@+id/action_HomeFragment_to_newpatientprofiles"
+        app:destination="@+id/nav_newpatientprofiles"
+        />
+
+
 
 </navigation>
