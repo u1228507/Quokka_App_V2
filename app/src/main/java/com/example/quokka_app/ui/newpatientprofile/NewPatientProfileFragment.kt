@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import android.widget.ProgressBar
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.SetOptions
 import java.util.Calendar
@@ -39,6 +40,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
     private val calendar = Calendar.getInstance()
     private var selectedImageURI: Uri? = null
     private var isDOBFieldClicked = false
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +49,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
     ): View {
         _binding = FragmentNewpatientprofilesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        progressBar = binding.newpatientprofilesProgressBar
 
         // Patient Profile Image
         imagePicker = registerForActivityResult(
@@ -97,6 +100,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
         val firestore = FirebaseFirestore.getInstance()
 
         binding.buttonSave.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val userId = auth.currentUser?.uid
             val firstName = binding.textinputeditFirstname.text.toString()
             val middleName = binding.textinputeditMiddlename.text.toString()
@@ -228,8 +232,6 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                 )
                 val profilesCollection = firestore.collection("Patient Profiles")
 
-
-
                 if (selectedImageURI != null) {
                     val timeStamp = System.currentTimeMillis().toString()
                     val storageRef = FirebaseStorage.getInstance().reference
@@ -290,6 +292,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                                                 binding.inputDropdownMotherbirthdefect.setAdapter(null)
                                                 selectedImageURI = null
                                                 binding.PatientProfilePicture.setImageResource(R.drawable.baseline_person_24_purple)
+                                                progressBar.visibility = View.GONE
 
                                                 val bundle = Bundle()
                                                 bundle.putString("patientId", patientId)
@@ -354,6 +357,7 @@ class NewPatientProfileFragment : Fragment(R.layout.fragment_newpatientprofiles)
                         binding.inputDropdownMotherbirthdefect.setAdapter(null)
                         selectedImageURI = null
                         binding.PatientProfilePicture.setImageResource(R.drawable.baseline_person_24_purple)
+                        progressBar.visibility = View.GONE
 
                         val bundle = Bundle()
                         bundle.putString("patientId", patientId)

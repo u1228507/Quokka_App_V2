@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
@@ -15,6 +16,7 @@ import java.util.Locale
 
 class PostpartumVisitFragment : Fragment(R.layout.fragment_postpartum_visit) {
     private lateinit var binding: FragmentPostpartumVisitBinding
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +25,7 @@ class PostpartumVisitFragment : Fragment(R.layout.fragment_postpartum_visit) {
         binding = FragmentPostpartumVisitBinding.inflate(inflater, container, false)
         val view = binding.root
         val patientId = arguments?.getString("patientId") ?: ""
+        progressBar = binding.postpartumProgressBar
 
         // Alert System:
         // Temperature Alert
@@ -122,6 +125,7 @@ class PostpartumVisitFragment : Fragment(R.layout.fragment_postpartum_visit) {
         }
 
         binding.postpartumButtonSave.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val height = binding.postpartumTexteditHeight.text.toString()
             val weight = binding.postpartumTexteditWeight.text.toString()
             val temp = binding.postpartumTexteditTemperature.text.toString()
@@ -218,8 +222,10 @@ class PostpartumVisitFragment : Fragment(R.layout.fragment_postpartum_visit) {
                         binding.postpartumTexteditBreathingrate.text?.clear()
                         binding.postpartumTexteditFeeding.text?.clear()
                         binding.postpartumTexteditChildothercomments.text?.clear()
+                        progressBar.visibility = View.GONE
                         val fragmentManager = parentFragmentManager
                         fragmentManager.popBackStack()
+
 
                     }
                     .addOnFailureListener { e ->

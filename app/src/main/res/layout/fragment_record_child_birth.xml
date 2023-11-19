@@ -191,6 +191,13 @@
                 tools:ignore="LabelFor,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ProgressBar
+            android:id="@+id/recordchildbirth_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
         <!-- Button: Save Newborn General Information -->
         <Button
             android:id="@+id/button_save"

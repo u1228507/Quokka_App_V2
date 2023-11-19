@@ -943,7 +943,7 @@
                 android:layout_marginTop="-20dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/motherprofile_recordchildbirth_sexofchild"
+                android:text="@string/newpatient_input_pregseizures"
                 android:textSize="16sp"
                 android:visibility="gone"/>
 
@@ -1167,6 +1167,13 @@
                     android:textColor="@color/black"
                     android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ProgressBar
+                android:id="@+id/newpatientprofiles_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
             <!-- Button: Create New Patient Profile -->
             <Button

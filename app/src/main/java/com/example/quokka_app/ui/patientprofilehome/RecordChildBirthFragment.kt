@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
@@ -20,6 +21,7 @@ class RecordChildBirthFragment : Fragment() {
     private lateinit var binding: FragmentRecordChildBirthBinding
     private val calendar = Calendar.getInstance()
     private var isDOBFieldClicked: Boolean = true
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +30,16 @@ class RecordChildBirthFragment : Fragment() {
         binding = FragmentRecordChildBirthBinding.inflate(inflater, container, false)
         val view = binding.root
         val patientId = arguments?.getString("patientId") ?: ""
+        progressBar = binding.recordchildbirthProgressBar
 
         binding.buttonSave.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val firstName = binding.recordchildbirthTextinputeditFirstname.text.toString()
             val middleName = binding.recordchildbirthTextinputeditMiddlename.text.toString()
             val lastName = binding.recordchildbirthTextinputeditLastname.text.toString()
             val dateOfBirth = binding.recordchildbirthTextinputeditDob.text.toString()
             val sexOfChild = binding.recordchildbirthDropdownSexofchild.text.toString()
             val childPatientId = UUID.randomUUID().toString()
-
 
             // Error Messages:
             var isValid = true
@@ -71,7 +74,7 @@ class RecordChildBirthFragment : Fragment() {
                     "sexOfChild" to sexOfChild,
                     "childpatientid" to childPatientId
                 )
-
+                progressBar.visibility = View.GONE
                 childGeneralInfoRef.set(data)
                     .addOnSuccessListener { _ ->
                         Toast.makeText(

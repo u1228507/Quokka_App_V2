@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.quokka_app.R
@@ -21,6 +22,7 @@ class PrenatalVisitFragment : Fragment() {
     private var diastolicEdited = false
     private var heartRateEdited = false
     private var fetalHREdited = false
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,7 @@ class PrenatalVisitFragment : Fragment() {
         binding = FragmentPrenatalVisitBinding.inflate(inflater, container, false)
         val view = binding.root
         val patientId = arguments?.getString("patientId") ?: ""
+        progressBar = binding.prenatalProgressBar
 
         // Alert System:
         // Temperature Alert
@@ -88,6 +91,7 @@ class PrenatalVisitFragment : Fragment() {
         }
 
         binding.prenatalButtonSave.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val height = binding.prenatalTexteditHeight.text.toString()
             val weight = binding.prenatalTexteditWeight.text.toString()
             val temp = binding.prenatalTexteditTemperature.text.toString()
@@ -170,6 +174,7 @@ class PrenatalVisitFragment : Fragment() {
                         binding.prenatalTexteditFetalmove.setSelection(0)
                         binding.prenatalTexteditFetalposition.setText(R.string.prenatal_input_unknown)
                         binding.prenatalTexteditFetalposition.setSelection(0)
+                        progressBar.visibility = View.GONE
                         val fragmentManager = parentFragmentManager
                         fragmentManager.popBackStack()
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     private var _binding: FragmentFirstVisitBinding? = null
     private val binding get() = _binding!!
     private var isDueDateFieldClicked = false
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +36,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
     ): View {
         _binding = FragmentFirstVisitBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        progressBar = binding.firstvisitProgressBar
 
         // Data from New Patient Profile
         val firstName = arguments?.getString("firstname")
@@ -93,6 +96,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
         }
 
         binding.firstvisitButtonSavefirstvisit.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val height = binding.texteditFirstvisitHeight.text.toString()
             val weight = binding.texteditFirstvisitWeight.text.toString()
             val temperature = binding.texteditFirstvisitTemperature.text.toString()
@@ -177,6 +181,7 @@ class FirstVisitFragment : Fragment(R.layout.fragment_first_visit) {
                         prenatalChildVisitDocument.set(fetalData)
                             .addOnSuccessListener {}
                             .addOnFailureListener {}
+                        progressBar.visibility = View.GONE
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(
