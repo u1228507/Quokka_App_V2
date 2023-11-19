@@ -514,7 +514,6 @@
                 android:visibility="visible"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:counterEnabled="true"
                 app:errorIconDrawable="@drawable/baseline_error_24"
                 app:hintEnabled="true">
 
@@ -530,7 +529,7 @@
 
             <!-- Button: Save Prenatal Visit -->
             <Button
-                android:id="@+id/prenatal_button_save"
+                android:id="@+id/postpartum_button_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"

@@ -168,6 +168,8 @@ class PrenatalVisitFragment : Fragment() {
                         binding.prenatalTexteditFetalheartrate.text?.clear()
                         binding.prenatalTexteditFetalmove.setText(R.string.prenatal_input_unknown)
                         binding.prenatalTexteditFetalmove.setSelection(0)
+                        binding.prenatalTexteditFetalposition.setText(R.string.prenatal_input_unknown)
+                        binding.prenatalTexteditFetalposition.setSelection(0)
                         val fragmentManager = parentFragmentManager
                         fragmentManager.popBackStack()
 
@@ -264,7 +266,7 @@ class PrenatalVisitFragment : Fragment() {
     private fun showHeartRateConfirmation(heartRateValue: Double) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Heart Rate Warning")
-        alertDialogBuilder.setMessage("The inputted heart rate value ($heartRateValue mmHg) is outside the normal range (65 to 114 bpm). Are you sure this is the intended value?")
+        alertDialogBuilder.setMessage("The inputted heart rate value ($heartRateValue bpm) is outside the normal range (65 to 115 bpm). Are you sure this is the intended value?")
         alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
             val visitDate = getCurrentDateTimeAsString()
             val patientId = arguments?.getString("patientId") ?: ""
@@ -281,7 +283,7 @@ class PrenatalVisitFragment : Fragment() {
     private fun showFetalHRConfirmation(fetalHRValue: Double) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setTitle("Fetal Heart Rate Warning")
-        alertDialogBuilder.setMessage("The inputted fetal heart rate value ($fetalHRValue mmHg) is outside the normal range (110 to 160 bpm). Are you sure this is the intended value?")
+        alertDialogBuilder.setMessage("The inputted fetal heart rate value ($fetalHRValue bpm) is outside the normal range (110 to 160 bpm). Are you sure this is the intended value?")
         alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
             val visitDate = getCurrentDateTimeAsString()
             val patientId = arguments?.getString("patientId") ?: ""
