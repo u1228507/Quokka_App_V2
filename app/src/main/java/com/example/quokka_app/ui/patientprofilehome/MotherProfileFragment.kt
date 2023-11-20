@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.quokka_app.R
 import com.example.quokka_app.databinding.FragmentMotherProfileBinding
 import com.example.quokka_app.ui.postpartumvisit.PostpartumVisitFragment
@@ -41,6 +42,8 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
         val pastVisitsButton = binding.patientprofileshomeButtonPastvisits
         val prenatalVisitButton = binding.patientprofileshomeButtonRecordprenatal
         val postpartumVisitButton = binding.patientprofileshomeButtonRecordpostpartum
+        postpartumVisitButton.isEnabled = false
+        recordChildsBirthButton.visibility = View.GONE
 
         if (patientId.isNotBlank()) {
             isChildGeneralInfoExist(patientId)
@@ -75,10 +78,18 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
         }
 
         postpartumVisitButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.patientprofilehome_fragmentContainer,postpartumVisitFragment)
-                .addToBackStack(null)
-                .commit()
+            if (postpartumVisitButton.isEnabled) {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.patientprofilehome_fragmentContainer, postpartumVisitFragment)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "If the child has already been born, kindly ensure that you record the childbirth information before documenting a postpartum visit.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
 
@@ -101,8 +112,11 @@ class MotherProfileFragment : Fragment(R.layout.fragment_mother_profile) {
 
                     if (isChildInfoExists) {
                         binding.motherprofileButtonRecordchildsbirth.visibility = View.GONE
+                        binding.patientprofileshomeButtonRecordpostpartum.isEnabled = true
+
                     } else {
                         binding.motherprofileButtonRecordchildsbirth.visibility = View.VISIBLE
+                        binding.patientprofileshomeButtonRecordpostpartum.isEnabled = false
                     }
                 } else {
                     Log.e("MotherProfileFragment", "Error checking Child General Info", task.exception)

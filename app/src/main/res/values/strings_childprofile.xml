@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Buttons:
+    <string name="childprofile_button_childpersonalinfo">Child\'s Personal Information</string>
 
 </resources>
