@@ -16,6 +16,7 @@
     <string name="menu_patientprofiles">Patient Profiles</string>
     <string name="menu_firstvisit">First Visit</string>
     <string name="menu_patientprofileshome">Patient Profiles Home</string>
+    <string name="menu_settings">Settings</string>
 
     // Strings For Login
     <string name="login">Login</string>
@@ -26,4 +27,8 @@
     // Strings For Home
     <string name="home_button_patientprofiles">Patient Profiles</string>
     <string name="home_button_newpatientprofiles">New Patient Profiles</string>
+
+    // Strings For Settings
+    <string name="settings_logoutbutton">Logout</string>
+    <string name="settings_inquirytext">If you have any inquiries or require technical assistance, please reach out to biodesign@utah.edu.</string>
 </resources>

@@ -49,6 +49,14 @@
         tools:layout="@layout/fragment_first_visit">
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.quokka_app.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings">
+
+    </fragment>
+
     <action
         android:id="@+id/action_newPatientProfileFragment_to_firstVisitFragment"
         app:destination="@id/nav_firstvisit"
@@ -75,6 +83,8 @@
         app:destination="@+id/nav_newpatientprofiles"
         />
 
-
+    <action
+        android:id="@+id/global_action_HomeFragment"
+        app:destination="@id/nav_home" />
 
 </navigation>

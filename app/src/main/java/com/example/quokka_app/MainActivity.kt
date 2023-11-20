@@ -2,6 +2,7 @@ package com.example.quokka_app
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        // Navigation Drawer Code:
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -38,15 +38,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Navigation Drawer Code Continued:
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
-    // Navigation Drawer Code Continued:
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.nav_settings)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 
