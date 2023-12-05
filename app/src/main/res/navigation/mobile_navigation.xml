@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_notifications"
-        android:name="com.example.quokka_app.ui.notifications.NotificationsFragment"
-        android:label="@string/menu_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/nav_newpatientprofiles"
         android:name="com.example.quokka_app.ui.newpatientprofile.NewPatientProfileFragment"
         android:label="@string/menu_newpatientprofiles"
@@ -57,6 +51,32 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_pastprenatalvisits"
+        android:name="com.example.quokka_app.ui.patientprofilehome.PastVisitPrenatalFragment"
+        android:label="@string/menu_pastvistprenatal"
+        tools:layout="@layout/fragment_past_visit_prenatal">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pastpostpartumvisits"
+        android:name="com.example.quokka_app.ui.patientprofilehome.PastVisitPostpartumFragment"
+        android:label="@string/menu_pastvistpostpartum"
+        tools:layout="@layout/fragment_past_visit_postpartum">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pastpostpartumvisitdetailsfragment"
+        android:name="com.example.quokka_app.ui.pastvisits.PastPostpartumVisitDetailsFragment"
+        tools:layout="@layout/fragment_past_postpartum_visit_details">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pastprenatalvisitdetailsfragment"
+        android:name="com.example.quokka_app.ui.pastvisits.PastPrenatalVisitDetailsFragment"
+        tools:layout="@layout/fragment_past_postpartum_visit_details">
+    </fragment>
+
     <action
         android:id="@+id/action_newPatientProfileFragment_to_firstVisitFragment"
         app:destination="@id/nav_firstvisit"
@@ -91,5 +111,23 @@
     <action
         android:id="@+id/global_action_HomeFragment"
         app:destination="@id/nav_home" />
+
+    <action
+        android:id="@+id/action_pastvisits_to_prenatalvisitsfragment"
+        app:destination="@+id/nav_pastprenatalvisits"/>
+
+    <action
+        android:id="@+id/action_pastvisits_to_postpartumvisitsfragment"
+        app:destination="@+id/nav_pastpostpartumvisits"/>
+
+    <action
+        android:id="@+id/action_pastVisitPostpartumFragment_to_pastPostpartumVisitsDetailsFragment"
+        app:destination="@+id/nav_pastpostpartumvisitdetailsfragment"
+        />
+
+    <action
+        android:id="@+id/action_pastVisitPostpartumFragment_to_pastPrenatalVisitsDetailsFragment"
+        app:destination="@+id/nav_pastprenatalvisitdetailsfragment"
+        />
 
 </navigation>

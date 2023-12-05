@@ -89,7 +89,6 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"/>
 
-                <!-- Add more TextViews for other patient information here -->
             </LinearLayout>
 
             <!-- Button to view the patient profile -->
@@ -98,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/patientprofiles_buttontext_viewprofile"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true" />

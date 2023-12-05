@@ -14,17 +14,15 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val patientprofilesButton = binding.buttonHomePatientprofiles
-        val newpatientprofilesButton = binding.buttonHomePatientprofiles
+        val newpatientprofilesButton = binding.buttonHomeNewpatientprofile
 
         patientprofilesButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_patientProfilesHomeFragment)
@@ -33,6 +31,8 @@ class HomeFragment : Fragment() {
         newpatientprofilesButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_newpatientprofiles)
         }
+
+
         return root
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pastvisits_date">Visit Date: </string>
+    <string name="pastvisits_dategoeshere">Date Goes Here</string>
+
+// Postpartum Past Visit Details
+    <string name="postpartumvisitdetails_title_mother">Mother\'s Information: </string>
+    <string name="postpartumvisitdetails_title_motherhealthalerts">Mother\'s Health Alerts: </string>
+    <string name="postpartumvisitdetails_title_child">Child\'s Information:</string>
+    <string name="postpartumvisitdetails_title_childhealthalerts">Child\'s Health Alerts: </string>
+
+// Prenatal Past Visit Details
+    <string name="prenatalvisitdetails_VistNotFound">Visit Details Not Found</string>
+
+</resources>

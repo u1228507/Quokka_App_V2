@@ -34,8 +34,6 @@ class PatientProfilesFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View {
-        Log.d("PatientProfilesFragment", "onCreateView() called")
-
         _binding = FragmentPatientprofilesBinding.inflate(inflater, container, false)
         val view = binding.root
         searchEditText = binding.searchEditText

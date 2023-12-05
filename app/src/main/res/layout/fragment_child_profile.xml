@@ -1,66 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.patientprofilehome.MotherPersonalInfoFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/childpersonalinfo_firstname"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/topRowLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                android:text="@string/childpersonalinfo_firstname"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp" />
 
-                <!-- Personal Information -->
-                <Button
-                    android:id="@+id/patientprofileshome_button_personalinformation_child"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="@string/childprofile_button_childpersonalinfo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline1"
-                    app:layout_constraintDimensionRatio="1:1"
-                    android:background="@drawable/patientprofilehome_button_background2"/>
+            <TextView
+                android:id="@+id/childpersonalinfo_middlename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/childpersonalinfo_middlename"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+            <TextView
+                android:id="@+id/childpersonalinfo_lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/childpersonalinfo_lastname"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp" />
 
-                <!-- Past Visits -->
-                <Button
-                    android:id="@+id/patientprofileshome_button_pastvisits_child"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/patientprofileshome_button_pastvisits"
-                    app:layout_constraintStart_toEndOf="@+id/guideline1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    android:background="@drawable/patientprofilehome_button_background2"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/childpersonalinfo_dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/childpersonalinfo_dob"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/childpersonalinfo_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/childpersonalinfo_sex"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+
     </ScrollView>
-</RelativeLayout>
+</FrameLayout>

@@ -52,4 +52,9 @@
     <string name="motherprofile_motherinfo_fchwlastname2">FCHW\'s Last Name: </string>
     <string name="motherprofile_motherinfo_fchwphonenumber2">FCHW\'s Phone Number: </string>
 
+
+    // Mother Past Visit Strings:
+    <string name="pastvisit_prenatalvisits">Prenatal Visits</string>
+    <string name="pastvisit_postpartumvisits">Postpartum Visits</string>
+
 </resources>

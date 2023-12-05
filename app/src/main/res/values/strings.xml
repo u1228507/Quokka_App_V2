@@ -10,13 +10,15 @@
 
     // Strings For Fragments:
     <string name="menu_home">Home</string>
-    <string name="menu_notifications">Notifications</string>
     <string name="menu_newpatientprofiles">New Patient Profiles</string>
     <string name="menu_userprofile">User Profile</string>
     <string name="menu_patientprofiles">Patient Profiles</string>
     <string name="menu_firstvisit">First Visit</string>
     <string name="menu_patientprofileshome">Patient Profiles Home</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_pastvistprenatal">Prenatal Past Visit</string>
+    <string name="menu_pastvistpostpartum">Postpartum Past Visit</string>
+
 
     // Strings For Login
     <string name="login">Login</string>

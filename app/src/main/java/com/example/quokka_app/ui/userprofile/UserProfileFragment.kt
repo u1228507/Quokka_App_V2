@@ -17,7 +17,7 @@ class UserProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val UserProfileViewModel = ViewModelProvider(this).get(UserProfileViewModel::class.java)
         _binding = FragmentUserprofileBinding.inflate(inflater, container, false)
         val root: View = binding.root
